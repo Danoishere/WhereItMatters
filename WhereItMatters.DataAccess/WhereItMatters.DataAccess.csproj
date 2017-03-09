@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{655CBBEE-164B-409F-BA82-75CD140115D1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WhereItMatters.DataAccess</RootNamespace>
+    <AssemblyName>WhereItMatters.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataAccess.cs" />
+    <Compile Include="DonationRequestRepository.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="Migrations\201702181101147_Initial.cs" />
+    <Compile Include="Migrations\201702181101147_Initial.Designer.cs">
+      <DependentUpon>201702181101147_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702210958306_ShortSummaryAdded.cs" />
+    <Compile Include="Migrations\201702210958306_ShortSummaryAdded.Designer.cs">
+      <DependentUpon>201702210958306_ShortSummaryAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702211343541_DonorNameAdded.cs" />
+    <Compile Include="Migrations\201702211343541_DonorNameAdded.Designer.cs">
+      <DependentUpon>201702211343541_DonorNameAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702211357410_TimeAndShowInDonationLog.cs" />
+    <Compile Include="Migrations\201702211357410_TimeAndShowInDonationLog.Designer.cs">
+      <DependentUpon>201702211357410_TimeAndShowInDonationLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702222001061_TimestampsAdded.cs" />
+    <Compile Include="Migrations\201702222001061_TimestampsAdded.Designer.cs">
+      <DependentUpon>201702222001061_TimestampsAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702222014495_NullableClosedOn.cs" />
+    <Compile Include="Migrations\201702222014495_NullableClosedOn.Designer.cs">
+      <DependentUpon>201702222014495_NullableClosedOn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703081841316_OrganisationChanges.cs" />
+    <Compile Include="Migrations\201703081841316_OrganisationChanges.Designer.cs">
+      <DependentUpon>201703081841316_OrganisationChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703090912185_PageInfosAdded.cs" />
+    <Compile Include="Migrations\201703090912185_PageInfosAdded.Designer.cs">
+      <DependentUpon>201703090912185_PageInfosAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703091006029_PageInfosNameCorrection.cs" />
+    <Compile Include="Migrations\201703091006029_PageInfosNameCorrection.Designer.cs">
+      <DependentUpon>201703091006029_PageInfosNameCorrection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WhereItMatters.Core\WhereItMatters.Core.csproj">
+      <Project>{4e16fc0c-5419-4c21-b8a1-7cda66e7e94d}</Project>
+      <Name>WhereItMatters.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201702181101147_Initial.resx">
+      <DependentUpon>201702181101147_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702210958306_ShortSummaryAdded.resx">
+      <DependentUpon>201702210958306_ShortSummaryAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702211343541_DonorNameAdded.resx">
+      <DependentUpon>201702211343541_DonorNameAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702211357410_TimeAndShowInDonationLog.resx">
+      <DependentUpon>201702211357410_TimeAndShowInDonationLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702222001061_TimestampsAdded.resx">
+      <DependentUpon>201702222001061_TimestampsAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702222014495_NullableClosedOn.resx">
+      <DependentUpon>201702222014495_NullableClosedOn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703081841316_OrganisationChanges.resx">
+      <DependentUpon>201703081841316_OrganisationChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703090912185_PageInfosAdded.resx">
+      <DependentUpon>201703090912185_PageInfosAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703091006029_PageInfosNameCorrection.resx">
+      <DependentUpon>201703091006029_PageInfosNameCorrection.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

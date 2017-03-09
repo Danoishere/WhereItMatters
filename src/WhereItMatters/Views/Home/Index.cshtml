@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Welcome";
+    var mostUrgentRequests = ViewData["MostUrgentRequests"] as IEnumerable<DonationRequest>;
+    var trendingRequests = ViewData["TrendingRequests"] as IEnumerable<DonationRequest>;
+}
+
+
+@section AboveNavigation{
+    <div style="background-image:url('/images/panorama.jpg');background-position:center">
+        <br />
+        <div class="container">
+            <div class="jumbotron" style="opacity:0.75">
+                <h2>Save Lives. Now.</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                </p>
+            </div>
+        </div>
+    </div>
+}
+
+<br />
+
+<div class="row">
+    <h3 class="text-center">Most urgent projects</h3>
+    <p class="text-md text-center">Highest number of people impacted + highest urgency</p>
+</div>
+<br />
+<div class="row">
+    @foreach (var request in mostUrgentRequests)
+    {
+        @await Component.InvokeAsync("DonationRequest", new { donationRequestId = request.Id, request = request })
+    }
+</div>
+<br />
+<div class="row">
+    <div class="col-sm-12">
+        <a href="~/DonationRequest/ListUrgent" class="btn btn-danger center-block" style="width:180px">More urgent projects</a>
+    </div>
+</div>
+<br />
+<div class="seperator"></div>
+<br />
+<div class="row">
+    <h3 class="text-center">Trending projects</h3>
+    <p class="text-md text-center">Projects that got a lot of attention in the last few hours</p>
+</div>
+
+<div class="row">
+    @foreach (var request in trendingRequests)
+    {
+        @await Component.InvokeAsync("DonationRequest", new { donationRequestId = request.Id, request = request })
+    }
+</div>
+<br />
+<div class="row">
+    <a href="~/DonationRequest/ListAll" class="btn btn-danger center-block" style="width:150px">All projects</a>
+</div>
+<br />

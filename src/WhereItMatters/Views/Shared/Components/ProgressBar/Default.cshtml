@@ -1,0 +1,11 @@
+﻿@{
+    var percentage = ViewData["CurrentPercentage"];
+    var additional = ViewData["AdditionalPercentage"];
+}
+
+<div class="progress">
+    <div class="progress-bar" role="progressbar" style="width:@percentage%">
+    </div>
+    <div class="progress-bar" role="progressbar" style="width:@additional%;background-color:#12876F">
+    </div>
+</div>

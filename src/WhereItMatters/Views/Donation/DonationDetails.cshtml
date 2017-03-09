@@ -1,0 +1,68 @@
+﻿@model Donation
+@{ 
+    ViewData["Title"] = "Donation Details";
+}
+
+    <h2>
+        Donation for @Model.DonationRequest.Title
+    </h2>
+@await Component.InvokeAsync("ProgressBar", new { maxValue = Model.DonationRequest.NeededAmountUSD, currentValue = Model.DonationRequest.Donated, additionalValue = Model.AmountUSD})
+
+<form asp-action="DonationPayment" asp-controller="Donation">
+    <input name="donationrequestid" type="hidden" value="@Model.DonationRequestId" />
+    <input name="amountusd" type="hidden" value="@Model.AmountUSD"/>
+    <br/>
+    <div class="row">
+        <div class="col-sm-3">
+            Amount
+        </div>
+        <div class="col-sm-9">
+            $@Model.AmountUSD
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-sm-3">
+            Email*
+        </div>
+        <div class="col-sm-9">
+            <input asp-for="DonorEmail" class="form-control" type="email" placeholder="Donor Email Address" value="@Model.DonorEmail"/>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-3">
+            Comment
+        </div>
+        <div class="col-sm-9">
+            <textarea asp-for="Comment" placeholder="This comment will be published with your donation. Can also be blank" class="form-control" rows="5"></textarea>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-sm-3">
+            Show in donation log
+        </div>
+        <div class="col-sm-9">
+            @Html.EditorFor(m => m.ShowInDonationLog)
+            @*<label asp-for="ShowInDonationLog">Show donation in donation log</label>*@
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-sm-3">
+            Name
+        </div>
+        <div class="col-sm-9">
+            <input name="donorname" class="form-control" placeholder="Name for donation log. Can be empty." value="@Model.DonorName"/>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+            <input class="btn btn-success btn-lg" type="submit" value="Continue to Checkout" />
+        </div>
+    </div>
+    <br/>
+</form>

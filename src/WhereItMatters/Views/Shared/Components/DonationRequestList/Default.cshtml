@@ -1,0 +1,7 @@
+﻿@model IEnumerable<DonationRequest>
+<div class="row">
+    @foreach (var request in Model)
+    {
+        @await Component.InvokeAsync("DonationRequest", new { donationRequestId = request.Id, request = request })
+    }
+</div>

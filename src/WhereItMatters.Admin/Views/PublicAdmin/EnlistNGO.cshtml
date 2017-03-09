@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Enlist NGO";
+}
+@model Organisation
+
+<form asp-controller="PublicAdmin" asp-action="SendEnlistmentRequest">  
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Enlist your NGO</h2>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12">
+            <p>Please tell us more about your NGO. One of our members will go through your information and will contact you as soon as possible.</p>
+        </div>
+    </div> 
+    <div class="row">
+        <div class="col-sm-3">
+            <label asp-for="Name">Name of your NGO</label>
+        </div>
+        <div class="col-sm-9">
+            <input placeholder="KUNE AID" class="form-control" asp-for="Name" />
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-sm-3">
+            <label asp-for="Description">Describe your NGO</label>
+        </div>
+        <div class="col-sm-9">
+            <textarea rows="5" class="form-control" asp-for="Description" placeholder="Since 2012, we are engaged all over the world to improve..."></textarea>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-sm-3">
+            <label asp-for="Mail">Email Address</label>
+        </div>
+        <div class="col-sm-9">
+            <input class="form-control" asp-for="Mail" type="email" placeholder="ngo@domain.com" />
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-sm-3"> </div>
+        <div class="col-sm-9">
+            <input class="btn btn-success" type="submit" value="Send request" />
+        </div>
+    </div>
+</form>

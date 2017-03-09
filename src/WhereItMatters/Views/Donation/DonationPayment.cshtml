@@ -1,0 +1,13 @@
+﻿@model Donation
+<form method="post" asp-action="ExecuteDonationPayment" asp-controller="Donation">
+    
+    <input type="hidden" name="amountusd" value="@Model.AmountUSD" />
+    <input type="hidden" name="comment" value="@Model.Comment" />
+    <input type="hidden" name="denysupportmoney" value="@Model.DenySupportMoney" />
+    <input type="hidden" name="donationrequestid" value="@Model.DonationRequestId" />
+    <input type="hidden" name="donoremail" value="@Model.DonorEmail" />
+    <input type="hidden" name="donorname" value="@Model.DonorName" />
+    <input type="hidden" name="showindonationlog" value="@Model.ShowInDonationLog.ToString()" />
+    <input type="hidden" name="timestamp" value="@Model.TimeStamp" />
+    <input class="form-control" type="submit" value="Pay (to be replaced by credit card form)"/>
+</form>
