@@ -47,12 +47,19 @@
 
             <div class="navbar-collapse collapse pull-right">
                 <ul class="text nav navbar-nav">
+
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li><a class="text" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li><a class="text" asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                        @if (User.IsInRole(AppConfig.RoleADMIN))
+                        {
+                            <li><a class="text" asp-area="" asp-controller="Organisation" asp-action="List">Organisations</a></li>
+                        }
+                        else if (User.IsInRole(AppConfig.RoleNGO))
+                        {
+                            <li><a class="text" asp-area="" asp-controller="Mission" asp-action="List?OrganisationId=@User.OrganisationId()">Mission</a></li>
+                        }
+
                         <li><a class="text" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                        <li><div style="margin-top:10px"> | </div></li>
                     }
                     
                     <li><a class="text" asp-area="" asp-controller="Home" asp-action="About">Enlist your NGO</a></li>

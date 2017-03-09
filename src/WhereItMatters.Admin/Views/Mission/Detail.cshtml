@@ -1,0 +1,7 @@
+﻿@model Mission
+
+@foreach (var donationRequest in Model.Requests)
+{
+    <p>@donationRequest.Title</p>
+    <a href="@Url.Action("Detail","DonationRequest", new {requestId = donationRequest.Id})">Show</a>
+}

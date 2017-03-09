@@ -1,0 +1,7 @@
+﻿@model IEnumerable<Organisation>
+
+@foreach (var organisation in Model)
+{
+    <p>@organisation.Name</p>
+    <a href="@Url.Action("List","Mission", new {organisationId = organisation.Id})">Show</a>
+}

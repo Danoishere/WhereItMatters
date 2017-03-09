@@ -1,0 +1,8 @@
+﻿@model DonationRequest
+
+<h1>@Model.Title</h1>
+
+@foreach (var donation in Model.Donations)
+{
+    <p>@donation.AmountUSD - @donation.DonorName</p>
+}

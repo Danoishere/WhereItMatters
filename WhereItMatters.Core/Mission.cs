@@ -29,5 +29,7 @@ namespace WhereItMatters.Core
 
         public int OrganisationId { get; set; }
         public Organisation Organisation { get; set; }
+
+        public List<DonationRequest> Requests { get; set; }
     }
 }

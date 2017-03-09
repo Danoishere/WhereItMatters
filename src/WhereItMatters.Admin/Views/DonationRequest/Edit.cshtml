@@ -1,0 +1,75 @@
+﻿@model DonationRequest
+
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Edit Donation Request</h1>
+    </div>
+</div>
+<form asp-action="SaveDonationRequest" asp-controller="DonationRequest" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="row">
+        <div class="col-sm-3">
+            <label asp-for="Title">Title of your request</label>
+        </div>
+        <div class="col-sm-9">
+            <input asp-for="Title" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <label asp-for="ShortSummary">Very short summary</label>
+        </div>
+        <div class="col-sm-9">
+            <textarea rows="3" maxlength="100" asp-for="ShortSummary" class="form-control" placeholder="This is what the user sees on the start-page or scrolling through the list."></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <label asp-for="Description">Detailed description</label>
+        </div>
+        <div class="col-sm-9">
+            <textarea rows="3" maxlength="100" asp-for="Description" class="form-control" placeholder="A detailed description about your organisation."></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <label asp-for="NeededAmountUSD">Needed Amount USD</label>
+        </div>
+        <div class="col-sm-9">
+            <input type="number" asp-for="NeededAmountUSD" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <label asp-for="Priority">Priority</label>
+        </div>
+        <div class="col-sm-9">
+            <select asp-for="Priority">
+                <option value="@Priority.L1Max">
+                    1 - Max
+                </option>
+                <option value="@Priority.L2">
+                    2
+                </option>
+                <option value="@Priority.L3">
+                    3
+                </option>
+                <option value="@Priority.L4">
+                    4
+                </option>
+                <option value="@Priority.L5">
+                    5
+                </option>
+                <option value="@Priority.L6Min">
+                    6 - Min
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+            <input type="submit" value="Save Request" />
+        </div>
+    </div>
+</form>

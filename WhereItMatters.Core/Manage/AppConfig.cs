@@ -10,5 +10,8 @@ namespace WhereItMatters.Core
     {
         public static string DomainMain { get; set; } = "http://whereitmattersdev.azurewebsites.net";
         public static string DomainAdmin { get; set; } = "http://whereitmattersdev-admin.azurewebsites.net";
+
+        public const string RoleADMIN  = "ADMIN";
+        public const string RoleNGO  = "NGO";
     }
 }

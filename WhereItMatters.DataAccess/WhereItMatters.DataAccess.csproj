@@ -88,6 +88,10 @@
     <Compile Include="Migrations\201703091006029_PageInfosNameCorrection.Designer.cs">
       <DependentUpon>201703091006029_PageInfosNameCorrection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703091027553_OrganisationIdForNGOs.cs" />
+    <Compile Include="Migrations\201703091027553_OrganisationIdForNGOs.Designer.cs">
+      <DependentUpon>201703091027553_OrganisationIdForNGOs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryBase.cs" />
@@ -129,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703091006029_PageInfosNameCorrection.resx">
       <DependentUpon>201703091006029_PageInfosNameCorrection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703091027553_OrganisationIdForNGOs.resx">
+      <DependentUpon>201703091027553_OrganisationIdForNGOs.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
