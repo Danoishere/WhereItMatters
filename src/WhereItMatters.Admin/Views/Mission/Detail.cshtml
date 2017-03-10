@@ -1,7 +1,37 @@
 ﻿@model Mission
 
-@foreach (var donationRequest in Model.Requests)
-{
-    <p>@donationRequest.Title</p>
-    <a href="@Url.Action("Detail","DonationRequest", new {requestId = donationRequest.Id})">Show</a>
-}
+<h1>Mission '@Model.Name'</h1>
+<br/>
+<p>
+    @Model.Comment
+</p>
+<br/>
+<h2>Donation Requests</h2>
+<br/>
+<table class="table table-responsive table-hover">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Is Request Finished
+            </th>
+        </tr>
+    </thead>
+    @foreach (var donationRequest in Model.Requests)
+    {
+        <tr>
+            <td>
+                <a asp-action="Detail" asp-controller="DonationRequest" asp-route-requestId="@donationRequest.Id">
+                    @donationRequest.Title
+                </a>
+            </td>
+            <td>
+                <a asp-action="Detail" asp-controller="DonationRequest" asp-route-requestId="@donationRequest.Id">
+                    @donationRequest.IsFinished
+                </a>
+            </td>
+        </tr>
+    }
+</table>

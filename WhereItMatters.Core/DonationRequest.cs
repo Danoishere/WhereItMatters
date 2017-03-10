@@ -31,7 +31,13 @@ namespace WhereItMatters.Core
 
         public bool IsFinanced
         {
-            get { return NeededAmountUSD == Donations.Sum(d => d.AmountUSD); }
+            get
+            {
+                if (Donations == null)
+                    return false;
+
+                return NeededAmountUSD == Donations.Sum(d => d.AmountUSD);
+            }
         }
 
         public bool IsFinished
@@ -41,13 +47,22 @@ namespace WhereItMatters.Core
 
         public double PercentageOfFulfillment
         {
-            get { return Donations.Sum(d => d.AmountUSD)/NeededAmountUSD; }
+            get
+            {
+                if (Donations == null)
+                    return 0;
+
+                return Donations.Sum(d => d.AmountUSD)/NeededAmountUSD;
+            }
         }
 
         public double Donated
         {
             get
             {
+                if (Donations == null)
+                    return 0;
+
                 return Donations.Sum(d => d.AmountUSD);
             }
         }
@@ -56,6 +71,9 @@ namespace WhereItMatters.Core
         {
             get
             {
+                if (Donations == null)
+                    return NeededAmountUSD;
+
                 return NeededAmountUSD - Donations.Sum(d => d.AmountUSD);
             }
         }

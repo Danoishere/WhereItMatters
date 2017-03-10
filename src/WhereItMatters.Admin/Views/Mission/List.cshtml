@@ -1,7 +1,39 @@
 ﻿@model IEnumerable<Mission>
-
-@foreach (var mission in Model)
-{
-    <p>@mission.Name</p>
-    <a href="@Url.Action("Detail","Mission", new {missionId = mission.Id})">Show</a>
-}
+<br/>
+<h1>Missions</h1>
+<br/>
+<table class="table table-responsive table-hover">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Is Active
+            </th>
+            <th>
+                Created At
+            </th>
+        </tr>
+    </thead>
+    @foreach (var mission in Model)
+    {
+        <tr>
+            <td>
+                <a asp-action="Detail" asp-controller="Mission" asp-route-missionId="@mission.Id">
+                    @mission.Name
+                </a>
+            </td>
+            <td>
+                <a asp-action="Detail" asp-controller="Mission" asp-route-missionId="@mission.Id">
+                    @mission.IsActive
+                </a>
+            </td>
+            <td>
+                <a asp-action="Detail" asp-controller="Mission" asp-route-missionId="@mission.Id">
+                    @mission.CreatedAt
+                </a>
+            </td>
+        </tr>
+    }
+</table>

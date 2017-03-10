@@ -5,8 +5,14 @@
         <h1>Edit Donation Request</h1>
     </div>
 </div>
-<form asp-action="SaveDonationRequest" asp-controller="DonationRequest" method="post">
+<br/>
+<form asp-action="Edit" asp-controller="DonationRequest" asp-route-requestId="@Model.Id" method="post">
     <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="CreatedOn"/>
+    <input type="hidden" asp-for="EndDate" />
+    <input type="hidden" asp-for="MissionId"/>
+    <input type="hidden" asp-for="ClosedOn" />
+    
     <div class="row">
         <div class="col-sm-3">
             <label asp-for="Title">Title of your request</label>
@@ -15,6 +21,7 @@
             <input asp-for="Title" class="form-control" />
         </div>
     </div>
+    <br />
     <div class="row">
         <div class="col-sm-3">
             <label asp-for="ShortSummary">Very short summary</label>
@@ -23,28 +30,40 @@
             <textarea rows="3" maxlength="100" asp-for="ShortSummary" class="form-control" placeholder="This is what the user sees on the start-page or scrolling through the list."></textarea>
         </div>
     </div>
+    <br />
     <div class="row">
         <div class="col-sm-3">
             <label asp-for="Description">Detailed description</label>
         </div>
         <div class="col-sm-9">
-            <textarea rows="3" maxlength="100" asp-for="Description" class="form-control" placeholder="A detailed description about your organisation."></textarea>
+            <textarea rows="7" maxlength="100" asp-for="Description" class="form-control" placeholder="A detailed description about your organisation."></textarea>
         </div>
     </div>
+    <br />
     <div class="row">
         <div class="col-sm-3">
             <label asp-for="NeededAmountUSD">Needed Amount USD</label>
         </div>
         <div class="col-sm-9">
-            <input type="number" asp-for="NeededAmountUSD" class="form-control" />
+            <input type="number" min="0.00" step="0.05" asp-for="NeededAmountUSD" class="form-control" />
         </div>
     </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-3">
+            <label asp-for="ApproxPopulationImpacted">Impacted Population</label>
+        </div>
+        <div class="col-sm-9">
+            <input type="number" asp-for="ApproxPopulationImpacted" min="0" step="1" class="form-control" />
+        </div>
+    </div>
+    <br />
     <div class="row">
         <div class="col-sm-3">
             <label asp-for="Priority">Priority</label>
         </div>
         <div class="col-sm-9">
-            <select asp-for="Priority">
+            <select class="form-control" asp-for="Priority">
                 <option value="@Priority.L1Max">
                     1 - Max
                 </option>
@@ -66,10 +85,11 @@
             </select>
         </div>
     </div>
+    <br />
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-9">
-            <input type="submit" value="Save Request" />
+            <input class="btn btn-success" type="submit" value="Save Request" />
         </div>
     </div>
 </form>

@@ -1,8 +1,103 @@
 ﻿@model DonationRequest
 
 <h1>@Model.Title</h1>
-
-@foreach (var donation in Model.Donations)
-{
-    <p>@donation.AmountUSD - @donation.DonorName</p>
-}
+<br />
+<div class="row">
+    <div class="col-sm-12">
+        <a class="btn btn-info pull-right" asp-action="Edit" asp-controller="DonationRequest" asp-route-requestId="@Model.Id">Edit</a>
+    </div>
+</div>
+<br />
+<div class="thumbnail">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Donation Summary</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6">
+                    <label>Number of donations</label>
+                </div>
+                <div class="col-sm-6">
+                    <b>@Model.Donations.Count</b>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6">
+                    <label>Days until campaign end</label>
+                </div>
+                <div class="col-sm-6">
+                    <b>@Model.DaysUntilEnd</b>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6">
+                    <label>Donation target</label>
+                </div>
+                <div class="col-sm-6">
+                    <b>$@Model.NeededAmountUSD</b>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6">
+                    <label>Currently donated</label>
+                </div>
+                <div class="col-sm-6">
+                    <b>$@Model.Donated</b>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6">
+                    <label>Request-time finished</label>
+                </div>
+                <div class="col-sm-6">
+                    <b>@Model.IsFinished</b>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6">
+                    <label>Request financed</label>
+                </div>
+                <div class="col-sm-6">
+                    <b>@Model.IsFinanced</b>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-3">
+                    <label>Email-Addresses of donors</label>
+                </div>
+                <div class="col-sm-9">
+                    <b>
+                        @ViewData["DonorMailAddresses"]
+                    </b>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<table class="table table-responsive">
+    @foreach (var donation in Model.Donations)
+            {
+        <tr>
+            <td>@donation.TimeStamp</td>
+            <td>@donation.DonorName</td>
+            <td>@donation.DonorEmail</td>
+            <td style="text-align:right"><b>$@donation.AmountUSD</b></td>
+        </tr>
+    }
+</table>
