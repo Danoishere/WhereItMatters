@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using WhereItMatters.Core;
 using WhereItMatters.DataAccess;
+using Microsoft.AspNetCore.Http;
 
 namespace WhereItMatters.Admin.Controllers
 {
@@ -39,15 +40,18 @@ namespace WhereItMatters.Admin.Controllers
             return View(organisation);
         }
 
-        [Route("Edit/{orginasitonId}")]
         public async Task<IActionResult> Edit(int organisationId)
         {
-            var organisation = await _organisationRepository.GetById(organisationId);
-            return View(organisation);
+            if(organisationId != 0)
+            {
+                var organisation = await _organisationRepository.GetById(organisationId);
+                return View(organisation);
+            }
+
+            return View(new Organisation());
         }
 
         [HttpPost]
-        [Route("Edit/{orginasitonId}")]
         public async Task<IActionResult> Edit(int organisationId, Organisation organisation)
         {
             if (organisationId == 0)

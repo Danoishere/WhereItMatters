@@ -51,5 +51,31 @@ namespace WhereItMatters.Admin.Controllers
 
             return View(new List<Mission>());
         }
+
+        public async Task<IActionResult> Edit(int missionId)
+        {
+            if (missionId != 0)
+            {
+                var mission = await _missionRepository.GetById(missionId);
+                return View(mission);
+            }
+
+            return View(new Mission());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int missionId, Mission mission)
+        {
+            if (missionId == 0)
+            {
+                await _missionRepository.Insert(mission);
+            }
+            else
+            {
+                await _missionRepository.Update(mission);
+            }
+
+            return View(mission);
+        }
     }
 }

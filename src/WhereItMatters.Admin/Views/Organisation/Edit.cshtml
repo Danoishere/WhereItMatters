@@ -5,6 +5,7 @@
 
 <h1>Edit Organisation</h1>
 <form asp-action="Edit" asp-controller="Organisation" asp-route-organisationId="@Model.Id">
+    <input type="hidden" asp-for="Id" />
     <div class="row">
         <div class="col-sm-3">
             <label asp-for="Name"></label>
@@ -13,6 +14,7 @@
             <input asp-for="Name" class="form-control" />
         </div>
     </div>
+    <br/>
     <div class="row">
         <div class="col-sm-3">
             <label asp-for="Description"></label>
@@ -21,14 +23,34 @@
             <textarea rows="5" asp-for="Description" class="form-control"></textarea>
         </div>
     </div>
+    <br/>
+    <div class="row">
+        <div class="col-sm-3">
+            <label asp-for="Mail"></label>
+        </div>
+        <div class="col-sm-9">
+            <input asp-for="Mail" class="form-control" />
+        </div>
+    </div>
+    <br />
     <div class="row">
         <div class="col-sm-3">
             <label asp-for="IsActive"></label>
         </div>
         <div class="col-sm-9">
-            <input type="checkbox" />
+            @Html.EditorFor(o => o.IsActive)
         </div>
     </div>
+    <br/>
+    <div class="row">
+        <div class="col-sm-3">
+            <label asp-for="IsApproved"></label>
+        </div>
+        <div class="col-sm-9">
+            @Html.EditorFor(o => o.IsApproved)
+        </div>
+    </div>
+    <br />
     <div class="row">
         <div class="col-sm-3">
         </div>

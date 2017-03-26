@@ -6,7 +6,7 @@
     </div>
 </div>
 <br/>
-<form asp-action="Edit" asp-controller="DonationRequest" asp-route-requestId="@Model.Id" method="post">
+<form asp-action="Edit" asp-controller="DonationRequest" asp-route-requestId="@Model.Id" method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="Id" />
     <input type="hidden" asp-for="CreatedOn"/>
     <input type="hidden" asp-for="EndDate" />
@@ -64,14 +64,7 @@
             <label>Request Image</label>
         </div>
         <div class="col-sm-9">
-            <div class="input-group" style="max-width:480px">
-                <span class="input-group-btn">
-                    <span class="btn btn-primary btn-file">
-                        Browse <input type="file" single>
-                    </span>
-                </span>
-                <input type="text" class="form-control" readonly>
-            </div>
+            <input type="file" class="form-control" name="files"/>
         </div>
     </div>
     <br />

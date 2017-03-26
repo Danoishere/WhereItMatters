@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -70,8 +71,9 @@ namespace WhereItMatters.Admin.Controllers
 
         [HttpPost]
         [Route("Edit/{requestId}")]
-        public async Task<IActionResult> Edit(int requestId, DonationRequest request)
+        public async Task<IActionResult> Edit(int requestId, DonationRequest request, IList<IFormFile> files)
         {
+            var f = files;
             var newImageUrl = await _imageSaveService.SaveImage(Request);
             if (!string.IsNullOrEmpty(newImageUrl))
             {

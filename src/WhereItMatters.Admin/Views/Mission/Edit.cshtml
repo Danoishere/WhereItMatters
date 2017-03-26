@@ -13,6 +13,7 @@
             <input asp-for="Name" class="form-control" />
         </div>
     </div>
+    <br/>
     <div class="row">
         <div class="col-sm-3">
             <label asp-for="Comment"></label>
@@ -21,30 +22,34 @@
             <textarea rows="5" asp-for="Comment" class="form-control"></textarea>
         </div>
     </div>
+    <br/>
     <div class="row">
         <div class="col-sm-3">
             <label asp-for="IsActive"></label>
         </div>
         <div class="col-sm-9">
-            <input type="checkbox" />
+            @Html.EditorFor(m => m.IsActive)
         </div>
     </div>
+    <br/>
     <div class="row">
         <div class="col-sm-3">
             <label asp-for="Latitude"></label>
         </div>
         <div class="col-sm-9">
-            <input asp-for="Latitude" />
+            <input asp-for="Latitude" class="form-control" />
         </div>
     </div>
+    <br/>
     <div class="row">
         <div class="col-sm-3">
             <label asp-for="Latitude"></label>
         </div>
         <div class="col-sm-9">
-            <input asp-for="Longitude" />
+            <input asp-for="Longitude" class="form-control" />
         </div>
     </div>
+    <br/>
     <div class="row">
         <div class="col-sm-3">
         </div>
