@@ -1,7 +1,7 @@
 ﻿@model Organisation
 <br />
 <h1>@Model.Name</h1>
-<a class="btn btn-info pull-right" asp-action="Edit" asp-route-organisationId="@Model.Id">Edit</a>
+<a class="btn btn-info pull-right" asp-action="Edit" asp-route-organisationId="@Model.Id">Edit organisation</a>
 <br />
 <br/>
 <div class="thumbnail">
@@ -42,7 +42,7 @@
 </div>
 <br />
 <h2>Missions of @Model.Name</h2>
-<a class="btn btn-info pull-right" asp-controller="Mission" asp-action="Edit" asp-route-missionId="0">New</a>
+<a class="btn btn-info pull-right" asp-controller="Mission" asp-action="Create" asp-route-organisationId="@Model.Id">New mission</a>
 <br />
 <table class="table table-responsive table-hover">
     <thead>

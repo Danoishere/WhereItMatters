@@ -63,11 +63,17 @@ namespace WhereItMatters.Admin.Controllers
             return View(new Mission());
         }
 
+        public IActionResult Create(int organisationId)
+        {
+            return View("Edit", new Mission { OrganisationId = organisationId });
+        }
+
         [HttpPost]
         public async Task<IActionResult> Edit(int missionId, Mission mission)
         {
             if (missionId == 0)
             {
+                mission.CreatedAt = DateTime.Now;
                 await _missionRepository.Insert(mission);
             }
             else

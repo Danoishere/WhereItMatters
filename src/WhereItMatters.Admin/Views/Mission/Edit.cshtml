@@ -3,8 +3,11 @@
     ViewData["Title"] = "Edit Mission";
 }
 
-<h1>Edit Organisation</h1>
+<h1>Edit Mission</h1>
 <form asp-action="Edit" asp-controller="Mission" asp-route-missionId="@Model.Id">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="OrganisationId" />
+    <input type="hidden" asp-for="CreatedAt" />
     <div class="row">
         <div class="col-sm-3">
             <label asp-for="Name"></label>
