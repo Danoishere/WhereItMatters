@@ -44,10 +44,12 @@
     <Compile Include="Donation.cs" />
     <Compile Include="DonationRequest.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="Config\ImageConfig.cs" />
     <Compile Include="Manage\AppConfig.cs" />
     <Compile Include="Manage\PageInfo.cs" />
     <Compile Include="Mission.cs" />
     <Compile Include="Organisation.cs" />
+    <Compile Include="Config\PaymentConfig.cs" />
     <Compile Include="Priority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

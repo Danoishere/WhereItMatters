@@ -7,24 +7,30 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using WhereItMatters.Core;
 using WhereItMatters.DataAccess;
+using Microsoft.AspNetCore.Identity;
+using WhereItMatters.Admin.Models;
 
 namespace WhereItMatters.Admin.Controllers
 {
     [Authorize]
     public class MissionController : Controller
     {
-
         private readonly IRepository<Mission> _missionRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public MissionController(IRepository<Mission> missionRepository)
+        public MissionController(IRepository<Mission> missionRepository, UserManager<ApplicationUser> userManager)
         {
             _missionRepository = missionRepository;
+            _userManager = userManager;
         }
 
 
         public async Task<IActionResult> List(int organisationId)
         {
-            if(User.IsInRole(AppConfig.RoleADMIN) || User.OrganisationId() == organisationId)
+
+            var ngoUserOrganisationId = await _userManager.GetOrganisationId(HttpContext);
+
+            if (User.IsInRole(AppConfig.RoleADMIN) || (ngoUserOrganisationId.HasValue && ngoUserOrganisationId.Value == organisationId))
             {
                 var missions = await _missionRepository.SearchFor(m => m.OrganisationId == organisationId).ToListAsync();
                 return View(missions);
@@ -36,8 +42,9 @@ namespace WhereItMatters.Admin.Controllers
 
         public async Task<IActionResult> Detail(int missionId)
         {
+            var ngoUserOrganisationId = await _userManager.GetOrganisationId(HttpContext);
             var mission = await _missionRepository.SearchFor(m => m.Id == missionId).Include(m => m.Requests).FirstOrDefaultAsync();
-            if (User.IsInRole(AppConfig.RoleADMIN) || User.OrganisationId() == mission.OrganisationId)
+            if (User.IsInRole(AppConfig.RoleADMIN) || (ngoUserOrganisationId.HasValue && ngoUserOrganisationId.Value == mission.OrganisationId))
             {
                 return View(mission);
             }

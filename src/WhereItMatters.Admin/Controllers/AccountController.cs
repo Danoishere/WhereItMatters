@@ -11,6 +11,9 @@ using Microsoft.Extensions.Logging;
 using WhereItMatters.Admin.Models;
 using WhereItMatters.Admin.Models.AccountViewModels;
 using WhereItMatters.Admin.Services;
+using WhereItMatters.Core;
+using WhereItMatters.DataAccess;
+using System.Data.Entity;
 
 namespace WhereItMatters.Admin.Controllers
 {
@@ -22,19 +25,24 @@ namespace WhereItMatters.Admin.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
+        private readonly IRepository<Organisation> _organisationRepository;
+        private readonly IRepository<Mission> _missionRepository;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory,
+            IRepository<Organisation> organisationRepository,
+            IRepository<Mission> missionRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<AccountController>();
+            _organisationRepository = organisationRepository;
         }
 
         //
@@ -88,33 +96,34 @@ namespace WhereItMatters.Admin.Controllers
         //
         // GET: /Account/Register
         [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Register(string returnUrl = null)
+        [Authorize(Roles = AppConfig.RoleADMIN)]
+        public async Task<IActionResult> Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+            ViewData["Organisations"] = await _organisationRepository.GetAll().ToListAsync();
             return View();
         }
 
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = AppConfig.RoleADMIN)]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                if(model.Role == AppConfig.RoleNGO)
+                {
+                    user.OrganisationId = model.OrganisationId;
+                }
+
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
-                    // Send an email with this link
-                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
-                    //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
+                    await _userManager.AddToRoleAsync(user, model.Role);
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
                     return RedirectToLocal(returnUrl);
@@ -256,7 +265,6 @@ namespace WhereItMatters.Admin.Controllers
         //
         // POST: /Account/ForgotPassword
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
@@ -436,6 +444,17 @@ namespace WhereItMatters.Admin.Controllers
             }
         }
 
+        [Authorize(Roles = AppConfig.RoleADMIN)]
+        public async Task<IActionResult> UserOverview()
+        {
+            var admins = await _userManager.GetUsersInRoleAsync(AppConfig.RoleADMIN);
+            var ngos = await _userManager.GetUsersInRoleAsync(AppConfig.RoleNGO);
+
+            ViewData["AdminUsers"] = admins;
+            ViewData["NGOUsers"] = ngos;
+
+            return View();
+        }
         #region Helpers
 
         private void AddErrors(IdentityResult result)

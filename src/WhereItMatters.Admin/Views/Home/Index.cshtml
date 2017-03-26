@@ -2,13 +2,11 @@
     ViewData["Title"] = "Home Page";
 }
 
-@if (User.IsInRole("ADMIN"))
+@if (User.IsInRole(AppConfig.RoleADMIN))
 {
-
-
+    @Html.Partial("AdminStart");
 }
-else if (User.IsInRole("NGO"))
+else if (User.IsInRole(AppConfig.RoleNGO))
 {
-
-
+    @Html.Partial("NGOStart");
 }

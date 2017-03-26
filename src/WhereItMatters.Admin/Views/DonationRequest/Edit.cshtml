@@ -12,6 +12,7 @@
     <input type="hidden" asp-for="EndDate" />
     <input type="hidden" asp-for="MissionId"/>
     <input type="hidden" asp-for="ClosedOn" />
+    <input type="hidden" asp-for="ImageUrl" />
     
     <div class="row">
         <div class="col-sm-3">
@@ -55,6 +56,22 @@
         </div>
         <div class="col-sm-9">
             <input type="number" asp-for="ApproxPopulationImpacted" min="0" step="1" class="form-control" />
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-sm-3">
+            <label>Request Image</label>
+        </div>
+        <div class="col-sm-9">
+            <div class="input-group" style="max-width:480px">
+                <span class="input-group-btn">
+                    <span class="btn btn-primary btn-file">
+                        Browse <input type="file" single>
+                    </span>
+                </span>
+                <input type="text" class="form-control" readonly>
+            </div>
         </div>
     </div>
     <br />

@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 
 using System.Threading.Tasks;
+using WhereItMatters.Admin.Services;
 using WhereItMatters.Core;
 using WhereItMatters.DataAccess;
 
@@ -17,10 +18,16 @@ namespace WhereItMatters.Admin.Controllers
     {
         private readonly DonationRequestRepository _requestRepository;
         private readonly IRepository<Donation> _donationRepository;
-        public DonationRequestController(DonationRequestRepository requestRepository, IRepository<Donation> donationRepository)
+        private readonly IImageSaveService _imageSaveService;
+
+        public DonationRequestController(
+            DonationRequestRepository requestRepository, 
+            IRepository<Donation> donationRepository,
+            IImageSaveService imageSaveService)
         {
             _requestRepository = requestRepository;
             _donationRepository = donationRepository;
+            _imageSaveService = imageSaveService;
         }
 
         [Route("Detail/{requestId}")]
@@ -63,12 +70,16 @@ namespace WhereItMatters.Admin.Controllers
 
         [HttpPost]
         [Route("Edit/{requestId}")]
-        public async Task<IActionResult> Save(int requestId, DonationRequest request)
+        public async Task<IActionResult> Edit(int requestId, DonationRequest request)
         {
+            var newImageUrl = await _imageSaveService.SaveImage(Request);
+            if (!string.IsNullOrEmpty(newImageUrl))
+            {
+                request.ImageUrl = newImageUrl;
+            }
+
             if (requestId == 0)
             {
-
-
                 await _requestRepository.Insert(request);
             }
             else

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -75,6 +76,14 @@ namespace WhereItMatters.Core
                     return NeededAmountUSD;
 
                 return NeededAmountUSD - Donations.Sum(d => d.AmountUSD);
+            }
+        }
+
+        public string FullImageUrl
+        {
+            get
+            {
+                return ImageConfig.Url + ImageUrl;
             }
         }
     }

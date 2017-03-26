@@ -1,0 +1,49 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var admins = ViewData["AdminUsers"] as IEnumerable<ApplicationUser>;
+    var ngos = ViewData["NGOUsers"] as IEnumerable<ApplicationUser>;
+}
+
+<h1>Users</h1>
+<br/>
+<div class="row">
+    <div class="col-sm-12">
+        <h2>Admin Logins</h2>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-sm-12">
+        <table>
+            @foreach (var user in admins)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-sm-12">
+        <h2>NGO Logins</h2>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-sm-12">
+        <table>
+            @foreach (var user in ngos)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@user.OrganisationId</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+

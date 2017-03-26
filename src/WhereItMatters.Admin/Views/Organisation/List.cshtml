@@ -1,7 +1,30 @@
 ﻿@model IEnumerable<Organisation>
+<br/>
+<h1>Organisations</h1>
+<br/>
+<table class="table table-responsive table-hover">
 
-@foreach (var organisation in Model)
-{
-    <p>@organisation.Name</p>
-    <a href="@Url.Action("List","Mission", new {organisationId = organisation.Id})">Show</a>
-}
+    
+        @foreach (var organisation in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Detail" asp-controller="Organisation" asp-route-organisationId="@organisation.Id">
+                        @organisation.Name
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Detail" asp-controller="Organisation" asp-route-organisationId="@organisation.Id">
+                        @organisation.Mail
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Detail" asp-controller="Organisation" asp-route-organisationId="@organisation.Id">
+                        @organisation.IsActive
+                    </a>
+                </td>
+            </tr>
+        }
+    
+
+    </table>

@@ -1,6 +1,7 @@
 ﻿@model RegisterViewModel
 @{
     ViewData["Title"] = "Register";
+    var organisations = ViewData["Organisations"] as IList<Organisation>;
 }
 
 <h2>@ViewData["Title"].</h2>
@@ -28,6 +29,28 @@
         <div class="col-md-10">
             <input asp-for="ConfirmPassword" class="form-control" />
             <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Role" class="col-md-2 control-label">Role</label>
+        <div class="col-md-10">
+            <select asp-for="Role" class="form-control">
+                <option value="@AppConfig.RoleADMIN">Admin</option>
+                <option value="@AppConfig.RoleNGO">NGO</option>
+            </select>
+            <span asp-validation-for="Role" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Role" class="col-md-2 control-label">Organisation (NGO role only)</label>
+        <div class="col-md-10">
+            <select asp-for="OrganisationId" class="form-control">
+                @foreach (var organisation in organisations)
+                {
+                    <option value="@organisation.Id">@organisation.Name</option>
+                }
+            </select>
+            <span asp-validation-for="Role" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group">

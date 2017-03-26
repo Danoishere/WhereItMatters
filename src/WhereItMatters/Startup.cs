@@ -43,6 +43,8 @@ namespace WhereItMatters
             services.AddScoped<DonationRequestRepository, DonationRequestRepository>();
             services.AddScoped<IRepository<Organisation>, BaseRepository<Organisation>>();
             services.AddScoped<IRepository<Mission>, BaseRepository<Mission>>();
+
+            ImageConfig.Url = "http://whereitmattersdev-admin.azurewebsites.net/images/";
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

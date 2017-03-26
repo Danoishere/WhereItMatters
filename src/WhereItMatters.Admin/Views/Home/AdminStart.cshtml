@@ -1,0 +1,23 @@
+﻿<div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Admin panel.</h1>
+        </div>
+    </div>
+    <br />
+    <div class="thumbnail">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>User Management</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <a asp-action="Register" asp-controller="Account" asp-route-returnurl="@ViewData["ReturnUrl"]">Add new user</a>
+            </div>
+            <div class="col-sm-6">
+                <a asp-action="UserOverview" asp-controller="Account">List all users</a>
+            </div>
+        </div>
+    </div>
+</div>

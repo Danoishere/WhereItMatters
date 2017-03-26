@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject UserManager<ApplicationUser> userManager
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -56,7 +58,7 @@
                         }
                         else if (User.IsInRole(AppConfig.RoleNGO))
                         {
-                            <li><a class="text" asp-area="" asp-controller="Mission" asp-action="List?OrganisationId=@User.OrganisationId()">Mission</a></li>
+                            <li><a class="text" asp-area="" asp-controller="Mission" asp-action="List" asp-route-organisationId="@await userManager.GetOrganisationId(Context)">Mission</a></li>
                         }
 
                         <li><a class="text" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
@@ -80,7 +82,7 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
-
+        <script src="~/js/fileselect.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -92,10 +94,12 @@
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
+        <script src="~/js/fileselect.min.js" asp-append-version="true"></script>
     </environment>
 
     <script src="~/lib/owl.carousel/dist/owl.carousel.min.js"></script>
     <script src="~/lib/wow/dist/wow.min.js"></script>
+    
     <script>
         new WOW().init();
     </script>
