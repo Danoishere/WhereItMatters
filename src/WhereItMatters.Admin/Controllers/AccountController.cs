@@ -26,7 +26,6 @@ namespace WhereItMatters.Admin.Controllers
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
         private readonly IRepository<Organisation> _organisationRepository;
-        private readonly IRepository<Mission> _missionRepository;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
