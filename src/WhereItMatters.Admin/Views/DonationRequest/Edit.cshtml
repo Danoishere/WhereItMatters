@@ -75,22 +75,22 @@
         <div class="col-sm-9">
             <select class="form-control" asp-for="Priority">
                 <option value="@Priority.L1Max">
-                    1 - Max
+                    @Priority.L1Max.GetEnumDescription()
                 </option>
                 <option value="@Priority.L2">
-                    2
+                    @Priority.L2.GetEnumDescription()
                 </option>
                 <option value="@Priority.L3">
-                    3
+                    @Priority.L3.GetEnumDescription()
                 </option>
                 <option value="@Priority.L4">
-                    4
+                    @Priority.L4.GetEnumDescription()
                 </option>
                 <option value="@Priority.L5">
-                    5
+                    @Priority.L5.GetEnumDescription()
                 </option>
                 <option value="@Priority.L6Min">
-                    6 - Min
+                    @Priority.L6Min.GetEnumDescription()
                 </option>
             </select>
         </div>
