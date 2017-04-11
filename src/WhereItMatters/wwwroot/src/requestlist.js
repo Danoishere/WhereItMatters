@@ -8,6 +8,7 @@ export class RequestList {
     @bindable searchTerm = '';
 
     constructor(httpClient) {
+        this.imageUrl = window.imagePath;
         this.message = 'Show List!';
         this.httpClient = httpClient;
         this.filter = new Filter(this);
