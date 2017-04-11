@@ -86,5 +86,40 @@ namespace WhereItMatters.Core
                 return ImageConfig.Url + ImageUrl;
             }
         }
+
+        public double ProjectIntensity
+        {
+            get
+            {
+                var daysUntilEnd = (double)DaysUntilEnd;
+                var priorityDecimal = (double)((int)Priority + 1);
+                var populationDecimal = (double)ApproxPopulationImpacted;
+                var impactDecimal = populationDecimal/priorityDecimal;
+
+                var top = Math.Pow(daysUntilEnd, -1.0);
+                var bottom = Math.Pow(impactDecimal, -1.0);
+
+
+                return top/bottom;
+            }
+        }
+
+        public string PriorityString
+        {
+            get
+            {
+                return Priority.GetEnumDescription();
+            }
+        }
+
+        public bool HasImage
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(ImageUrl);
+            }
+        }
+
+
     }
 }

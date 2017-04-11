@@ -31,6 +31,11 @@ namespace WhereItMatters.Controllers
             return View();
         }
 
+        public IActionResult List()
+        {
+            return View("ListDonationRequests");
+        }
+
         public IActionResult ListUrgent()
         {
             return View("ListDonationRequests");

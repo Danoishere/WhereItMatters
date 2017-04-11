@@ -23,8 +23,7 @@ namespace WhereItMatters.Controllers
         public async Task<IActionResult> Index()
         {
             var urgent = await _donationRequestRepository.GetUrgentReuqests(3);
-
-            var trending = await _donationRequestRepository.GetUrgentReuqests(3);
+            var trending = await _donationRequestRepository.GetPopularRequests(3);
 
             ViewData["MostUrgentRequests"] = urgent;
             ViewData["TrendingRequests"] = trending;

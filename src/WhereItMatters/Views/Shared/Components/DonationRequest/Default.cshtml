@@ -3,18 +3,23 @@
     <a asp-area="" asp-controller="DonationRequest" asp-action="Overview" asp-route-id="@Model.Id">
         <div class="thumbnail" style="height:450px;margin-bottom:15px">
             <div style="max-height:200px;overflow:hidden;position:relative;margin:-5px;border-radius:5px">
-                
 
-                <img src="@Model.FullImageUrl" style="width:100%;border-radius:5px;margin:1px" alt="">
+                @if (Model.HasImage)
+                {
+                    <img src="@Model.FullImageUrl" style="width:100%;border-radius:5px;margin:1px" alt="">
+                }
                 <div class="image-overlay-bar"></div>
                 <div class="image-overlay font-accent">
                     <b>@Model.Mission.Name - @Model.Mission.Organisation.Name</b>
                 </div>
             </div>
             <div class="caption">
-                <h3 style="font-size:26px">@Model.Title</h3>
+                <h3 style="font-size:26px"
+                    data-toggle="tooltip"
+                    title="Priority Index: @Model.ProjectIntensity<br/>@Model.PriorityString<br/>Approx. impacted population: @Model.ApproxPopulationImpacted<br/>Days until end: @Model.DaysUntilEnd">
+                    @Model.Title
+                </h3>
                 <p class="text-italic">«@Model.ShortSummary»</p>
-                <p>@Model.FullImageUrl</p>
                 <div style="position:absolute;bottom:5px;left:30px;right:30px">
                     <div style="display:inline-block;width:100%">
                         @if (!Model.IsFinished)

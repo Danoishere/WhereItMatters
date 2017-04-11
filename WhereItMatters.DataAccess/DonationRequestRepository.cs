@@ -26,8 +26,22 @@ namespace WhereItMatters.DataAccess
                 .Include(r => r.Mission.Organisation)
                 .Include(r => r.Donations);
 
+            var requestList = await requests.ToListAsync();
+            requestList = requestList.Where(r => !r.IsFinished && !r.IsFinanced).ToList();
+            return requestList.OrderByDescending(r => r.ProjectIntensity).Take(number).ToList();
+        }
 
-            return await requests.Take(number).ToListAsync();
+        public async Task<IList<DonationRequest>> GetPopularRequests(int number)
+        {
+            var requests = GetAll();
+            requests = requests
+                .Include(r => r.Mission)
+                .Include(r => r.Mission.Organisation)
+                .Include(r => r.Donations);
+
+            var requestList = await requests.ToListAsync();
+            requestList = requestList.Where(r => !r.IsFinished && !r.IsFinanced).ToList();
+            return requestList.OrderByDescending(r => r.Donations.Count).Take(number).ToList();
         }
     }
 }

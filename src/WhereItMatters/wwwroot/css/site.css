@@ -29,6 +29,14 @@ textarea {
     line-height: 1.4;
 }
 
+.tooltip-inner {
+    text-align: left;
+    float:left;
+    white-space:pre-wrap;
+    max-width: 350px;
+    width:350px;
+}
+
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"]
 {
@@ -40,7 +48,7 @@ textarea {
 }
 
 .font-accent{
-    font-family: Arvo;
+    font-family: 'Source Sans Pro';
     font-weight:700;
 }
 
@@ -56,6 +64,7 @@ textarea {
     left:5px;
     color:white;
     font-size:20px;
+    padding-left: 20px;
 }
 
 .image-overlay-bar{
