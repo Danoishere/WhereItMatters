@@ -1,17 +1,34 @@
 ﻿@model Donation
-@{ 
+@{
     ViewData["Title"] = "Donation Details";
+    var donationType = (DonationType)ViewData["DonationType"];
 }
 
+@if (donationType == DonationType.DonationRequest)
+{
     <h2>
         Donation for @Model.DonationRequest.Title
     </h2>
-@await Component.InvokeAsync("ProgressBar", new { maxValue = Model.DonationRequest.NeededAmountUSD, currentValue = Model.DonationRequest.Donated, additionalValue = Model.AmountUSD})
-
+    @await Component.InvokeAsync("ProgressBar", new { maxValue = Model.DonationRequest.NeededAmountUSD, currentValue = Model.DonationRequest.Donated, additionalValue = Model.AmountUSD })
+}
+else if(donationType == DonationType.Organisation)
+{
+    <h2>
+        Donation for @Model.Organisation.Name
+    </h2>
+}
+else
+{
+    <h2>
+        Donation for @Model.Mission.Name
+    </h2>
+}
 <form asp-action="DonationPayment" asp-controller="Donation">
     <input name="donationrequestid" type="hidden" value="@Model.DonationRequestId" />
-    <input name="amountusd" type="hidden" value="@Model.AmountUSD"/>
-    <br/>
+    <input name="donationrequestid" type="hidden" value="@Model.MissionId" />
+    <input name="donationrequestid" type="hidden" value="@Model.OrganisationId" />
+    <input name="amountusd" type="hidden" value="@Model.AmountUSD" />
+    <br />
     <div class="row">
         <div class="col-sm-3">
             Amount
@@ -20,13 +37,13 @@
             $@Model.AmountUSD
         </div>
     </div>
-    <br/>
+    <br />
     <div class="row">
         <div class="col-sm-3">
             Email*
         </div>
         <div class="col-sm-9">
-            <input asp-for="DonorEmail" class="form-control" type="email" placeholder="Donor Email Address" value="@Model.DonorEmail"/>
+            <input asp-for="DonorEmail" class="form-control" type="email" placeholder="Donor Email Address" value="@Model.DonorEmail" />
         </div>
     </div>
     <br />
@@ -38,7 +55,7 @@
             <textarea asp-for="Comment" placeholder="This comment will be published with your donation. Can also be blank" class="form-control" rows="5"></textarea>
         </div>
     </div>
-    <br/>
+    <br />
     <div class="row">
         <div class="col-sm-3">
             Show in donation log
@@ -48,21 +65,21 @@
             @*<label asp-for="ShowInDonationLog">Show donation in donation log</label>*@
         </div>
     </div>
-    <br/>
+    <br />
     <div class="row">
         <div class="col-sm-3">
             Name
         </div>
         <div class="col-sm-9">
-            <input name="donorname" class="form-control" placeholder="Name for donation log. Can be empty." value="@Model.DonorName"/>
+            <input name="donorname" class="form-control" placeholder="Name for donation log. Can be empty." value="@Model.DonorName" />
         </div>
     </div>
     <br />
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-9">
-            <input class="btn btn-success btn-lg" type="submit" value="Continue to Checkout" />
+            <input class="btn btn-success btn-lg" type="submit" value="Continue to checkout" />
         </div>
     </div>
-    <br/>
+    <br />
 </form>

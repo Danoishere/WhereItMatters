@@ -111,6 +111,13 @@ textarea {
     border-radius:2px
 }
 
+.donation-box-bottom-right{
+    float:right !important;
+    position: absolute;
+    bottom: 12px;
+    right: 0;
+}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
   /* Hide captions */

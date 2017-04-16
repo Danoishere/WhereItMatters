@@ -38,6 +38,8 @@ namespace WhereItMatters.Controllers
 
         public IActionResult ListUrgent()
         {
+            ViewData["CheckL1"] = true;
+            ViewData["CheckL2"] = true;
             return View("ListDonationRequests");
         }
 

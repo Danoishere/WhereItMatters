@@ -5,6 +5,21 @@
 }
 <script>
     window.imagePath = '@ImageConfig.Url';
+    window.priorities = [];
+    window.priorities.L1 = '@Priority.L1Max.GetEnumDescription()';
+    window.priorities.L2 = '@Priority.L2.GetEnumDescription()';
+    window.priorities.L3 = '@Priority.L3.GetEnumDescription()';
+    window.priorities.L4 = '@Priority.L4.GetEnumDescription()';
+    window.priorities.L5 = '@Priority.L5.GetEnumDescription()';
+    window.priorities.L6 = '@Priority.L6Min.GetEnumDescription()';
+
+    window.filterData = [];
+    window.filterData.checkL1 = @((ViewData["CheckL1"] != null ? ViewData["CheckL1"] : false).ToString().ToLower());
+    window.filterData.checkL2 = @((ViewData["CheckL2"] != null ? ViewData["CheckL2"] : false).ToString().ToLower());
+    window.filterData.checkL3 = @((ViewData["CheckL3"] != null ? ViewData["CheckL3"] : false).ToString().ToLower());
+    window.filterData.checkL4 = @((ViewData["CheckL4"] != null ? ViewData["CheckL4"] : false).ToString().ToLower());
+    window.filterData.checkL5 = @((ViewData["CheckL5"] != null ? ViewData["CheckL5"] : false).ToString().ToLower());
+    window.filterData.checkL6 = @((ViewData["CheckL6"] != null ? ViewData["CheckL6"] : false).ToString().ToLower());
 </script>
 
 <div aurelia-app="requestlistmain">

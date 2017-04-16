@@ -147,6 +147,7 @@
   <ItemGroup>
     <Compile Include="Donation.cs" />
     <Compile Include="DonationRequest.cs" />
+    <Compile Include="DonationType.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="Config\ImageConfig.cs" />
     <Compile Include="Manage\AppConfig.cs" />

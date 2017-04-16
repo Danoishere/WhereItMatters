@@ -14,7 +14,12 @@ namespace WhereItMatters.DataAccess
 
         public async Task<DonationRequest> GetFullById(int id)
         {
-            var request = await _dbContext.Set<DonationRequest>().Include(r => r.Donations).FirstOrDefaultAsync(r => r.Id == id);
+            var request = await _dbContext.Set<DonationRequest>()
+                .Include(r => r.Donations)
+                .Include(r => r.Mission)
+                .Include(r => r.Mission.Organisation)
+                .FirstOrDefaultAsync(r => r.Id == id);
+
             return request;
         }
 

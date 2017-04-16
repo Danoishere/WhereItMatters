@@ -1,0 +1,86 @@
+﻿@model Organisation
+<br/>
+<div class="row">
+    <div class="col-sm-12">
+        <h1 class="pull-left">About @Model.Name</h1>
+        <div class="donation-box-bottom-right">
+            @await Component.InvokeAsync("DonationBox", new { donationType = DonationType.Organisation, targetId = Model.Id })
+        </div>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <b>@Model.Description</b>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="col-sm-12">
+        <div class="seperator"></div>
+    </div>
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-sm-6">
+                <label>Number of missions</label>
+            </div>
+            <div class="col-sm-6">
+                <b>@Model.Locations.Count</b>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-sm-6">
+                <label>Contact</label>
+            </div>
+            <div class="col-sm-6">
+                <b>@Model.Mail</b>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="seperator"></div>
+    </div>
+</div>
+<h2>Missions run by @Model.Name</h2>
+<br />
+<table class="table table-responsive table-hover">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Is Active
+            </th>
+            <th>
+                Created At
+            </th>
+        </tr>
+    </thead>
+    @foreach (var mission in Model.Locations)
+    {
+        <tr>
+            <td>
+                <a asp-action="Detail" asp-controller="Mission" asp-route-missionId="@mission.Id">
+                    @mission.Name
+                </a>
+            </td>
+            <td>
+                <a asp-action="Detail" asp-controller="Mission" asp-route-missionId="@mission.Id">
+                    @mission.IsActive
+                </a>
+            </td>
+            <td>
+                <a asp-action="Detail" asp-controller="Mission" asp-route-missionId="@mission.Id">
+                    @mission.CreatedAt
+                </a>
+            </td>
+        </tr>
+    }
+</table>

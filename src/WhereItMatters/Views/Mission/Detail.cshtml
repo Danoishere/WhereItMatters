@@ -1,0 +1,45 @@
+﻿@model Mission
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <h1 class="pull-left">Mission '@Model.Name'</h1>
+        <div class="donation-box-bottom-right">
+            @await Component.InvokeAsync("DonationBox", new { donationType = DonationType.Mission, targetId = Model.Id })
+        </div>
+    </div>
+</div>
+<br/>
+<p>
+    @Model.Comment
+</p>
+<br />
+<h2>Donation Requests</h2>
+<br />
+<table class="table table-responsive table-hover">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Is Request Finished
+            </th>
+        </tr>
+    </thead>
+    @foreach (var donationRequest in Model.Requests)
+    {
+        <tr>
+            <td>
+                <a asp-action="Overview" asp-controller="DonationRequest" asp-route-id="@donationRequest.Id">
+                    @donationRequest.Title
+                </a>
+            </td>
+            <td>
+                <a asp-action="Overview" asp-controller="DonationRequest" asp-route-id="@donationRequest.Id">
+                    @donationRequest.IsFinished
+                </a>
+            </td>
+        </tr>
+    }
+</table>

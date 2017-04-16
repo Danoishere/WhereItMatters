@@ -17,7 +17,13 @@ namespace WhereItMatters.Core
         public bool ShowInDonationLog { get; set; }
         public DateTime TimeStamp { get; set; }
 
-        public int DonationRequestId { get; set; }
+        public int? DonationRequestId { get; set; }
         public DonationRequest DonationRequest { get; set; }
+
+        public int? MissionId { get; set; }
+        public Mission Mission { get; set; }
+
+        public int? OrganisationId { get; set; }
+        public Organisation Organisation { get; set; }
     }
 }

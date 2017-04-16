@@ -24,5 +24,15 @@ namespace WhereItMatters.Controllers
             var organisations = await _organisationRepository.GetAll().ToListAsync();
             return View(organisations);
         }
+
+        public async Task<IActionResult> Detail(int organisationId)
+        {
+            var organisation = await _organisationRepository
+                .SearchFor(o => o.Id == organisationId)
+                .Include(o => o.Locations)
+                .FirstOrDefaultAsync();
+
+            return View(organisation);
+        }
     }
 }
