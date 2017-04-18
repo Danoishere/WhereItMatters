@@ -23,7 +23,7 @@ else
         Donation for @Model.Mission.Name
     </h2>
 }
-<form asp-action="DonationPayment" asp-controller="Donation">
+<form asp-action="DonationPaymentForm" asp-controller="Donation">
     <input name="donationrequestid" type="hidden" value="@Model.DonationRequestId" />
     <input name="donationrequestid" type="hidden" value="@Model.MissionId" />
     <input name="donationrequestid" type="hidden" value="@Model.OrganisationId" />

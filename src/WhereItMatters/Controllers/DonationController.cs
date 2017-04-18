@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WhereItMatters.Core;
 using WhereItMatters.DataAccess;
+using Microsoft.AspNetCore.Http;
+using Braintree;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,17 +18,20 @@ namespace WhereItMatters.Controllers
         private readonly IRepository<Mission> _missionRepository;
         private readonly IRepository<Organisation> _organisationRepository;
         private readonly DonationRequestRepository _donationRequestRepository;
+        private readonly IBraintreeGateway _gateway;
 
         public DonationController(
             IRepository<Donation> donationRepository, 
             DonationRequestRepository donationRequestRepository,
             IRepository<Organisation> organisationRepository,
-            IRepository<Mission> missionRepository)
+            IRepository<Mission> missionRepository,
+            IBraintreeGateway gateway)
         {
             _donationRepository = donationRepository;
             _donationRequestRepository = donationRequestRepository;
             _missionRepository = missionRepository;
             _organisationRepository = organisationRepository;
+            _gateway = gateway;
         }
 
         public async Task<IActionResult> DonationDetailsForRequest(DonationType donationType, int requestId, double amount)
@@ -70,20 +75,39 @@ namespace WhereItMatters.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> DonationPayment(Donation donation)
+        public ActionResult ExecuteDonationPayment(IFormCollection collection)
         {
-            // proceed payment
-            await Task.Delay(0);
+            var nonceFromTheClient = collection["payment_method_nonce"];
+            var amount = decimal.Parse(collection["amountusd"]);
 
-            return View(donation);
+            var request = new TransactionRequest
+            {
+                Amount = amount,
+                PaymentMethodNonce = nonceFromTheClient,
+                Options = new TransactionOptionsRequest
+                {
+                    SubmitForSettlement = true
+                }
+            };
+
+            var result = _gateway.Transaction.Sale(request);
+
+            return View("DonationPaymentResult", result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> ExecuteDonationPayment(Donation donation)
+        public async Task<IActionResult> DonationPaymentForm(Donation donation)
         {
-            donation.TimeStamp = DateTime.Now;
-            await _donationRepository.Insert(donation);
-            return View("DonationPaymentResult");
+            ViewData["BraintreeAuthorizationToken"] = await _gateway.ClientToken.generateAsync();
+            return View(donation);
         }
+
+        //[HttpPost]
+        //public async Task<IActionResult> ExecuteDonationPayment(Donation donation)
+        //{
+        //    donation.TimeStamp = DateTime.Now;
+        //    await _donationRepository.Insert(donation);
+        //    return View("DonationPaymentResult");
+        //}
     }
 }

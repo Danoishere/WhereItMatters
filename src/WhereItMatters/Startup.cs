@@ -13,6 +13,7 @@ using System.Data.Entity;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Newtonsoft.Json;
+using Braintree;
 
 namespace WhereItMatters
 {
@@ -43,6 +44,15 @@ namespace WhereItMatters
             services.AddScoped<DonationRequestRepository, DonationRequestRepository>();
             services.AddScoped<IRepository<Organisation>, BaseRepository<Organisation>>();
             services.AddScoped<IRepository<Mission>, BaseRepository<Mission>>();
+
+            // Configure payment
+            services.AddScoped<IBraintreeGateway>(_ => new BraintreeGateway
+            {
+                Environment = Braintree.Environment.SANDBOX,
+                MerchantId = "yddcm6yv73tp75pt",
+                PublicKey = "drdydcycp5fv4rsy",
+                PrivateKey = "0750c2f7f02f6f0b6a5dd85c0dd980b6"
+            });
 
             ImageConfig.Url = "http://whereitmattersdev-admin.azurewebsites.net/images/";
         }

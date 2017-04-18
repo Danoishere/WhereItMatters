@@ -1,7 +1,15 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Result<Transaction>
 
-<h2>Success</h2>
+@if (string.IsNullOrEmpty(Model.Message))
+{
+    <h1>Success.</h1>
+    <p>Looks like everything worked well. Thank you for your payment!</p>
+    <a asp-action="Index" asp-controller="Home" class="btn btn-success">Back to start</a>
+}
+else
+{
+    <h1>Looks like something went wrong.</h1>
+    <p>@Model.Message</p>
+    <p>We are really sorry for the inconvenience. Our team has been notified and is already working on the issue.</p>
+    <a asp-action="Index" asp-controller="Home" class="btn btn-danger">Okay, </a>
+}
