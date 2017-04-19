@@ -39,11 +39,16 @@ namespace WhereItMatters.Controllers
             var donation = new Donation
             {
                 DonationRequestId = requestId,
-                AmountUSD = amount,
             };
 
-            ViewData["DonationType"] = DonationType.DonationRequest;
             donation.DonationRequest = await _donationRequestRepository.GetFullById(requestId);
+
+            // Clamp donation amount to max possible and 0
+            amount = amount.Clamp(0, donation.DonationRequest.RemainingUSDNeeded);
+            donation.AmountUSD = amount;
+
+            ViewData["DonationType"] = DonationType.DonationRequest;
+            
             return View("DonationDetails", donation);
         }
 
@@ -73,41 +78,62 @@ namespace WhereItMatters.Controllers
             return View("DonationDetails", donation);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DonationPaymentForm(Donation donation)
+        {
+            string donationFor = "";
+            if (donation.DonationRequestId.HasValue)
+            {
+                donation.DonationRequest = await _donationRequestRepository.GetFullById(donation.DonationRequestId.Value);
+                donationFor = "Donation for " + donation.DonationRequest.Title;
+            }
+            else if (donation.MissionId.HasValue)
+            {
+                donation.Mission = await _missionRepository.GetById(donation.MissionId.Value);
+                donationFor = "Donation for the mission " + donation.Mission.Name;
+            }
+            else if (donation.OrganisationId.HasValue)
+            {
+                donation.Organisation = await _organisationRepository.GetById(donation.OrganisationId.Value);
+                donationFor = "Donation towards " + donation.Organisation.Name;
+            }
+
+            ViewData["BraintreeAuthorizationToken"] = await _gateway.ClientToken.generateAsync();
+            ViewData["DonationPurpose"] = donationFor;
+
+            return View(donation);
+        }
 
         [HttpPost]
-        public ActionResult ExecuteDonationPayment(IFormCollection collection)
+        public async Task<ActionResult> ExecuteDonationPayment(IFormCollection collection, Donation donation)
         {
             var nonceFromTheClient = collection["payment_method_nonce"];
-            var amount = decimal.Parse(collection["amountusd"]);
+            var cardholderFirstname = collection["cardholder_firstname"];
+            var cardholderLastname = collection["cardholder_lastname"];
 
             var request = new TransactionRequest
             {
-                Amount = amount,
+                Amount = (decimal)donation.AmountUSD,
                 PaymentMethodNonce = nonceFromTheClient,
+                BillingAddress =
+                {
+                    FirstName = cardholderFirstname,
+                    LastName = cardholderLastname,
+                },
                 Options = new TransactionOptionsRequest
                 {
                     SubmitForSettlement = true
                 }
             };
 
-            var result = _gateway.Transaction.Sale(request);
+            var result = await _gateway.Transaction.SaleAsync(request);
+            if (result.IsSuccess())
+            {
+                donation.TimeStamp = DateTime.Now;
+                await _donationRepository.Insert(donation);
+            }
 
             return View("DonationPaymentResult", result);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> DonationPaymentForm(Donation donation)
-        {
-            ViewData["BraintreeAuthorizationToken"] = await _gateway.ClientToken.generateAsync();
-            return View(donation);
-        }
-
-        //[HttpPost]
-        //public async Task<IActionResult> ExecuteDonationPayment(Donation donation)
-        //{
-        //    donation.TimeStamp = DateTime.Now;
-        //    await _donationRepository.Insert(donation);
-        //    return View("DonationPaymentResult");
-        //}
     }
 }

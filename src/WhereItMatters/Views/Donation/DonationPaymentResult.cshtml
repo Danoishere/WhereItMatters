@@ -1,6 +1,8 @@
 ﻿@model Result<Transaction>
-
-@if (string.IsNullOrEmpty(Model.Message))
+@{
+    ViewData["Title"] = "Payment result";
+}
+@if (Model.IsSuccess())
 {
     <h1>Success.</h1>
     <p>Looks like everything worked well. Thank you for your payment!</p>

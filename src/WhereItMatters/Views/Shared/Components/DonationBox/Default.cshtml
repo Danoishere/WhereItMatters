@@ -4,11 +4,12 @@
     var targetIdField = ViewData["TargetIdField"];
 }
 
-<div style="max-width:200px">
+<div style="max-width:220px">
     <form asp-controller="Donation" asp-action="@formAction">
         <input type="hidden" name="@targetIdField" value="@targetId" />
         <div class="input-group input-group-lg">
-            <input style="max-width:300px" name="amount" placeholder="$10" class="form-control" type="number" />
+            <span class="input-group-addon">$</span>
+            <input style="max-width:400px;text-align:right" step="0.05" name="amount" placeholder="10" class="form-control" type="number" />
             <span class="input-group-btn">
                 <input type="submit" class="btn btn-info" value="Donate" />
             </span>

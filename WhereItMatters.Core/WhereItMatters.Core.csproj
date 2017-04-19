@@ -152,6 +152,7 @@
     <Compile Include="Config\ImageConfig.cs" />
     <Compile Include="Manage\AppConfig.cs" />
     <Compile Include="Manage\PageInfo.cs" />
+    <Compile Include="MathExtensions.cs" />
     <Compile Include="Mission.cs" />
     <Compile Include="Organisation.cs" />
     <Compile Include="Config\PaymentConfig.cs" />
