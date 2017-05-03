@@ -293,12 +293,17 @@ define('requestlist',['exports', 'aurelia-fetch-client', 'aurelia-framework', '.
                         sumOfDonations = sumOfDonations + donation.amountUSD;
                     }, this);
                     request.stillNeeded = request.neededAmountUSD - sumOfDonations;
+                    request.stillNeeded = request.stillNeeded.toFixed(2);
                 }, _this);
             });
         };
 
         RequestList.prototype.searchTermChanged = function searchTermChanged(newVal, oldVal) {
             this.searchRequests(newVal);
+        };
+
+        RequestList.prototype.strip = function strip(number) {
+            return parseFloat(number).toPrecision(12);
         };
 
         return RequestList;

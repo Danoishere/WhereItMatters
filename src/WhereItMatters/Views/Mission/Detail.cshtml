@@ -1,5 +1,7 @@
 ﻿@model Mission
-
+@{
+    ViewData["Title"] = "Missions";
+}
 
 <div class="row">
     <div class="col-sm-12">
@@ -22,7 +24,13 @@
             <th>
                 Name
             </th>
-            <th>
+            <th class="text-right">
+                @PaymentConfig.Currency needed
+            </th>
+            <th class="text-right">
+                @PaymentConfig.Currency donated
+            </th>
+            <th class="text-center">
                 Is Request Finished
             </th>
         </tr>
@@ -35,7 +43,17 @@
                     @donationRequest.Title
                 </a>
             </td>
-            <td>
+            <td class="text-right">
+                <a asp-action="Overview" asp-controller="DonationRequest" asp-route-id="@donationRequest.Id">
+                    @PaymentConfig.CurrencyShort@donationRequest.NeededAmountUSD
+                </a>
+            </td>
+            <td class="text-right">
+                <a asp-action="Overview" asp-controller="DonationRequest" asp-route-id="@donationRequest.Id">
+                    @PaymentConfig.CurrencyShort@donationRequest.Donated
+                </a>
+            </td>
+            <td class="text-center">
                 <a asp-action="Overview" asp-controller="DonationRequest" asp-route-id="@donationRequest.Id">
                     @donationRequest.IsFinished
                 </a>

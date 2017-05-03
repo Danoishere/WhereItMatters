@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Where It Matters</title>
+    <title>@ViewData["Title"] | @await Localize.Get("APP_TITLE")</title>
 
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="~/lib/nprogress/nprogress.css" />
-    
+
     @RenderSection("scriptstop", required: false)
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -43,16 +43,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand font-accent" asp-area="" asp-controller="Home" asp-action="Index">Selfless Help</a>
+                <a class="navbar-brand font-accent" asp-area="" asp-controller="Home" asp-action="Index">@await Localize.Get("APP_TITLE")</a>
             </div>
 
-            <div class="navbar-collapse collapse pull-right">
-                <ul class="text nav navbar-nav">
-                    <li><a class="text" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a class="text" asp-area="" asp-controller="DonationRequest" asp-action="List">Projects</a></li>
-                    <li><a class="text" asp-area="" asp-controller="Organisation" asp-action="List">NGOs</a></li>
-                    <li><div style="margin-top:10px"> | </div></li>
-                    <li><a class="text" asp-area="" asp-controller="Home" asp-action="About">Enlist your NGO</a></li>
+            <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
+                <ul class="text nav navbar-nav navbar-right">
+                    <li><a class="text" asp-area="" asp-controller="DonationRequest" asp-action="List">@await Localize.Get("Nav_Projects")</a></li>
+                    <li><a class="text" asp-area="" asp-controller="Organisation" asp-action="List">@await Localize.Get("Nav_NGOs")</a></li>
+                    @*<li><div style="margin-top:10px"> | </div></li>*@
+                    <li class="dropdown">
+                        <a class="dropdown-toggle text" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="text" asp-area="" asp-controller="Home" asp-action="About">@await Localize.Get("Nav_EnlistYourNGO")</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a class="text" asp-action="Contact" asp-controller="Home">@await Localize.Get("Nav_Contact")</a></li>
+                            <li><a class="text" asp-action="About" asp-controller="Home">@await Localize.Get("Nav_About")</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -70,7 +77,7 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
-        
+
     </environment>
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"

@@ -147,9 +147,11 @@
   <ItemGroup>
     <Compile Include="Donation.cs" />
     <Compile Include="DonationRequest.cs" />
+    <Compile Include="DonationReward.cs" />
     <Compile Include="DonationType.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="Config\ImageConfig.cs" />
+    <Compile Include="LocalizedText.cs" />
     <Compile Include="Manage\AppConfig.cs" />
     <Compile Include="Manage\PageInfo.cs" />
     <Compile Include="MathExtensions.cs" />

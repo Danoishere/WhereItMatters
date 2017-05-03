@@ -34,7 +34,7 @@ namespace WhereItMatters.Controllers
             _gateway = gateway;
         }
 
-        public async Task<IActionResult> DonationDetailsForRequest(DonationType donationType, int requestId, double amount)
+        public async Task<IActionResult> DonationDetailsForRequest(DonationType donationType, int requestId, decimal amount)
         {
             var donation = new Donation
             {
@@ -52,7 +52,7 @@ namespace WhereItMatters.Controllers
             return View("DonationDetails", donation);
         }
 
-        public async Task<IActionResult> DonationDetailsForMission(DonationType donationType, int missionId, double amount)
+        public async Task<IActionResult> DonationDetailsForMission(DonationType donationType, int missionId, decimal amount)
         {
             var donation = new Donation
             {
@@ -65,7 +65,7 @@ namespace WhereItMatters.Controllers
             return View("DonationDetails", donation);
         }
 
-        public async Task<IActionResult> DonationDetailsForOrganisation(DonationType donationType, int organisationId, double amount)
+        public async Task<IActionResult> DonationDetailsForOrganisation(DonationType donationType, int organisationId, decimal amount)
         {
             var donation = new Donation
             {
@@ -115,7 +115,7 @@ namespace WhereItMatters.Controllers
             {
                 Amount = (decimal)donation.AmountUSD,
                 PaymentMethodNonce = nonceFromTheClient,
-                BillingAddress =
+                BillingAddress = new AddressRequest 
                 {
                     FirstName = cardholderFirstname,
                     LastName = cardholderLastname,

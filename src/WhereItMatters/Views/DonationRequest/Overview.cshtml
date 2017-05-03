@@ -3,90 +3,91 @@
     ViewData["Title"] = Model.Title;
 }
 
-<div class="col-sm-8">
-    <div class="row">
+<div class="row">
+    <div class="col-sm-8">
         <div class="col-sm-12">
-            <a asp-action="Detail" asp-controller="Organisation" asp-route-organisationId="@Model.Mission.OrganisationId"><h4>By @Model.Mission.Organisation.Name</h4></a>
-        </div>
-    </div>
-    <div style="width:100%;max-height:300px;overflow: hidden;border-radius:6px;border:2px solid #bdc3c7">
-        <img style="width:100%" src="@Model.FullImageUrl" />
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <h2>@Model.Title</h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <p class="text-md text-italic" style="">«@Model.ShortSummary»</p>
-        </div>
-    </div>
-    @if (!Model.IsFinanced && !Model.IsFinished)
-    {
-        <br />
-        <div class="seperator"></div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="pull-left">
-                    @await Component.InvokeAsync("DonationBox", new { donationType = DonationType.DonationRequest, targetId = Model.Id })
-                </div>
-                <div class="pull-right" style="margin-top:5px">
-                    <p class="text-md">@Model.DaysUntilEnd days until campaign end</p>
+            <div class="row">
+                <div class="col-sm-12">
+                    <a asp-action="Detail" asp-controller="Organisation" asp-route-organisationId="@Model.Mission.OrganisationId"><h4>By @Model.Mission.Organisation.Name</h4></a>
                 </div>
             </div>
-        </div>
-        <div class="seperator"></div>
-        <br />
-    }
-    // The campaign was not successful.
-    else if (Model.IsFinished && !Model.IsFinanced)
-    {
-        <br />
-        <div class="thumbnail">
-            <h4>Unfortunately, the campaign could not be finished.</h4>
-            <p>The donated money will be paid back to the donors.</p>
-        </div>
-        <br />
-    }
-    // The campaign was successful
-    else if (Model.IsFinanced)
-    {
-        <br />
-        <h4>The campaign has been sucessfully finished</h4>
-        <br />
-    }
-
-    @if (Model.IsFinished && !Model.IsFinanced) { }
-    else
-    {
-        <div style="display:inline-block;width:100%">
+            <div style="width:100%;max-height:300px;overflow: hidden;border-radius:6px;border:2px solid #bdc3c7">
+                <img style="width:100%" src="@Model.FullImageUrl" />
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>@Model.Title</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="text-md text-italic" style="">«@Model.ShortSummary»</p>
+                </div>
+            </div>
             @if (!Model.IsFinanced && !Model.IsFinished)
             {
-                <h3 class="center-block">@PaymentConfig.CurrencyShort@Model.RemainingUSDNeeded still needed</h3>
+            <br />
+            <div class="seperator"></div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="pull-left">
+                        @await Component.InvokeAsync("DonationBox", new { donationType = DonationType.DonationRequest, targetId = Model.Id })
+                    </div>
+                    <div class="pull-right" style="margin-top:5px">
+                        <p class="text-md">@Model.DaysUntilEnd days until campaign end</p>
+                    </div>
+                </div>
+            </div>
+            <div class="seperator"></div>
+            <br />
             }
+            // The campaign was not successful.
+            else if (Model.IsFinished && !Model.IsFinanced)
+            {
+            <br />
+            <div class="thumbnail">
+                <h4>Unfortunately, the campaign could not be finished.</h4>
+                <p>The donated money will be paid back to the donors.</p>
+            </div>
+            <br />
+            }
+            // The campaign was successful
+            else if (Model.IsFinanced)
+            {
+            <br />
+            <h4>The campaign has been sucessfully finished</h4>
+            <br />
+            }
+
+            @if (Model.IsFinished && !Model.IsFinanced) { }
             else
             {
-                <h3 class="center-block">Successfully financed</h3>
+            <div style="display:inline-block;width:100%">
+                @if (!Model.IsFinanced && !Model.IsFinished)
+                {
+                    <h3 class="center-block">@PaymentConfig.CurrencyShort@Model.RemainingUSDNeededString still needed</h3>
+                    }
+                    else
+                    {
+                    <h3 class="center-block">Successfully financed</h3>
+                    }
+            </div>
+            @await Component.InvokeAsync("ProgressBar", new { maxValue = Model.NeededAmountUSD, currentValue = Model.Donated })
             }
+            <br />
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="text-md">@Model.Description</p>
+                </div>
+            </div>
+
         </div>
-        @await Component.InvokeAsync("ProgressBar", new { maxValue = Model.NeededAmountUSD, currentValue = Model.Donated })
-    }
-
-
-    <br />
-    <div class="row">
         <div class="col-sm-12">
-            <p class="text-md">@Model.Description</p>
+            <br />
         </div>
-    </div>
-
-</div>
-
-@if (Model.Donations.Any())
-            {
-    <div class="col-sm-4">
-        <div class="thumbnail" style="padding:20px">
+        @if (Model.Donations.Any())
+        {
+        <div class="col-sm-12">
             <div class="row">
                 <div class="col-sm-12">
                     <h3>Collected Donations</h3>
@@ -94,31 +95,66 @@
             </div>
             <br />
             @foreach (var donation in Model.Donations)
-            {
+                {
                 <div class="row" style="height:30px">
                     <div class="col-sm-12">
-                        @if (donation.ShowInDonationLog)
-                        {
-                            <b class="text-md pull-left">@donation.DonorName,   </b>
-                        }
-                        else
-                        {
-                            <b class="text-md pull-left">Anonymous,   </b>
-                        }
+                        @if (donation.ShowInDonationLog && !string.IsNullOrWhiteSpace(donation.DonorName))
+                            {
+                            <b class="text-md pull-left">@donation.DonorName, </b>
+                            }
+                            else
+                            {
+                            <b class="text-md pull-left">Anonymous, </b>
+                            }
                         <p class="text-sm pull-left">@donation.TimeStamp.ToString("MM/dd/yyyy")</p>
                         <p class="text-md pull-right" style="margin-bottom:0">$@donation.AmountUSD</p>
                     </div>
                 </div>
                 @if (!string.IsNullOrEmpty(donation.Comment))
-                {
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <p class="text-sm text-italic">"@donation.Comment"</p>
-                        </div>
+                    {
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p class="text-sm text-italic">"@donation.Comment"</p>
                     </div>
-                }
+                </div>
+                    }
                 <div class="seperator"></div>
-            }
+                }
+        </div>
+        }
+    </div>
+    <div class="col-sm-4">
+        <div class="row">
+            <div class="col-sm-12">
+                <br />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h4>Rewards for donations</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="seperator"></div>
+            <div class="col-sm-12">
+                <h5>Donate $400 or more</h5>
+            </div>
+            <div class="col-sm-12">
+                <h4>Reward 1</h4>
+            </div>
+            <div class="col-sm-12">
+                <p>Description of the reward.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="seperator"></div>
+            <div class="col-sm-12">
+                <h4 class="pull-left">Reward 2</h4>
+                <h5 class="pull-right">$200</h5>
+            </div>
+            <div class="col-sm-12">
+                <p>Description of the reward.</p>
+            </div>
         </div>
     </div>
-}
+</div>

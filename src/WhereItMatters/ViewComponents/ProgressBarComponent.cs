@@ -9,7 +9,7 @@ namespace WhereItMatters.ViewComponents
     [ViewComponent(Name = "ProgressBar")]
     public class ProgressBarComponent : ViewComponent
     {
-        public async Task<IViewComponentResult> InvokeAsync(double maxValue, double currentValue, double additionalValue = 0)
+        public async Task<IViewComponentResult> InvokeAsync(decimal maxValue, decimal currentValue, decimal additionalValue = 0)
         {
             ViewData["CurrentPercentage"] = (currentValue/maxValue) * 100;
             if(additionalValue > maxValue - currentValue)

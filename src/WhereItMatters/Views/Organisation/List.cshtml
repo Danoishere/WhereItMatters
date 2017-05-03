@@ -1,11 +1,13 @@
 ﻿@model IEnumerable<Organisation>
-
+@{
+    ViewData["Title"] = "List NGOs";
+}
 <h1>Organisations</h1>
 <p>Here you can find all organisations we are working with.</p>
 
 @foreach (var organisation in Model)
 {
-    <div class="thumbnail">
+    <a class="thumbnail" asp-action="Detail" asp-controller="Organisation" asp-route-organisationId="@organisation.Id">
         <div class="row">
             <div class="col-sm-3">
 
@@ -15,13 +17,13 @@
                     <div class="col-sm-12"><h3>@organisation.Name</h3></div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12"><p>@organisation.Description</p></div>
+                    <div class="col-sm-12"><p>@organisation.Description.TruncateLongString(350)</p></div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12">Contact: <a href="mailto:@organisation.Mail">@organisation.Mail</a> </div>
+                    <div class="col-sm-12">Contact: @organisation.Mail </div>
                 </div>
             </div>
         </div>
-    </div>
+    </a>
     <br/>
 }

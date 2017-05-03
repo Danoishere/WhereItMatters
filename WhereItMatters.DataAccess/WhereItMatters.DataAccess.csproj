@@ -66,6 +66,10 @@
       <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Server.Abstractions.1.1.1\lib\net451\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNetCore.Html.Abstractions, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Html.Abstractions.1.1.1\lib\netstandard1.0\Microsoft.AspNetCore.Html.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.Http, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Http.1.1.1\lib\net451\Microsoft.AspNetCore.Http.dll</HintPath>
       <Private>True</Private>
@@ -145,6 +149,7 @@
       <HintPath>..\packages\System.Text.Encodings.Web.4.3.0\lib\netstandard1.0\System.Text.Encodings.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -156,6 +161,7 @@
     <Compile Include="DataAccess.cs" />
     <Compile Include="DonationRequestRepository.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="LocalizationRepository.cs" />
     <Compile Include="Migrations\201702181101147_Initial.cs" />
     <Compile Include="Migrations\201702181101147_Initial.Designer.cs">
       <DependentUpon>201702181101147_Initial.cs</DependentUpon>
@@ -199,6 +205,18 @@
     <Compile Include="Migrations\201704151000235_UnifiyingDonation.cs" />
     <Compile Include="Migrations\201704151000235_UnifiyingDonation.Designer.cs">
       <DependentUpon>201704151000235_UnifiyingDonation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704212006210_DoubleToDecimal.cs" />
+    <Compile Include="Migrations\201704212006210_DoubleToDecimal.Designer.cs">
+      <DependentUpon>201704212006210_DoubleToDecimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704272002375_DonationRewardsAndLocalization.cs" />
+    <Compile Include="Migrations\201704272002375_DonationRewardsAndLocalization.Designer.cs">
+      <DependentUpon>201704272002375_DonationRewardsAndLocalization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704272005247_DonationRewardsAndLocalization2.cs" />
+    <Compile Include="Migrations\201704272005247_DonationRewardsAndLocalization2.Designer.cs">
+      <DependentUpon>201704272005247_DonationRewardsAndLocalization2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -247,6 +265,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704151000235_UnifiyingDonation.resx">
       <DependentUpon>201704151000235_UnifiyingDonation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704212006210_DoubleToDecimal.resx">
+      <DependentUpon>201704212006210_DoubleToDecimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704272002375_DonationRewardsAndLocalization.resx">
+      <DependentUpon>201704272002375_DonationRewardsAndLocalization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704272005247_DonationRewardsAndLocalization2.resx">
+      <DependentUpon>201704272005247_DonationRewardsAndLocalization2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

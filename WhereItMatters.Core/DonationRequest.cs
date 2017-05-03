@@ -13,10 +13,11 @@ namespace WhereItMatters.Core
         public string Title { get; set; }
         public string ShortSummary { get; set; }
         public string Description { get; set; }
-        public double NeededAmountUSD { get; set; }
+        public decimal NeededAmountUSD { get; set; }
         public Priority Priority { get; set; }
         public int ApproxPopulationImpacted { get; set; }
         public List<Donation> Donations { get; set; }
+        public List<DonationReward> DonationRewards { get; set; }
 
         public DateTime CreatedOn { get; set; }
         public DateTime? ClosedOn { get; set; }
@@ -46,7 +47,12 @@ namespace WhereItMatters.Core
             get { return (EndDate - DateTime.Today).Days < 0; }
         }
 
-        public double PercentageOfFulfillment
+        public string NeededAmountUSDString
+        {
+            get { return NeededAmountUSD.MoneyFormat(); }
+        }
+
+        public decimal PercentageOfFulfillment
         {
             get
             {
@@ -57,7 +63,7 @@ namespace WhereItMatters.Core
             }
         }
 
-        public double Donated
+        public decimal Donated
         {
             get
             {
@@ -68,7 +74,12 @@ namespace WhereItMatters.Core
             }
         }
 
-        public double RemainingUSDNeeded
+        public string DonatedString
+        {
+            get { return Donated.MoneyFormat(); }
+        }
+
+        public decimal RemainingUSDNeeded
         {
             get
             {
@@ -77,6 +88,11 @@ namespace WhereItMatters.Core
 
                 return NeededAmountUSD - Donations.Sum(d => d.AmountUSD);
             }
+        }
+
+        public string RemainingUSDNeededString
+        {
+            get { return RemainingUSDNeeded.MoneyFormat(); }
         }
 
         public string FullImageUrl
@@ -119,7 +135,5 @@ namespace WhereItMatters.Core
                 return !string.IsNullOrEmpty(ImageUrl);
             }
         }
-
-
     }
 }

@@ -14,5 +14,24 @@ namespace WhereItMatters.Core
             else if (val.CompareTo(max) > 0) return max;
             else return val;
         }
+
+        public static string MoneyFormat(this decimal myNumber)
+        {
+            var s = string.Format("{0:0.00}", myNumber);
+
+            if (s.EndsWith("00"))
+            {
+                return ((int)myNumber).ToString();
+            }
+            else
+            {
+                return s;
+            }
+        }
+
+        public static string TruncateLongString(this string str, int maxLength)
+        {
+            return str.Substring(0, Math.Min(str.Length, maxLength));
+        }
     }
 }

@@ -13,7 +13,13 @@ namespace WhereItMatters.Core
         public string DonorName { get; set; }
         public string Comment { get; set; }
         public bool DenySupportMoney { get; set; }
-        public double AmountUSD { get; set; }
+        public decimal AmountUSD { get; set; }
+
+        public string AmountUSDString
+        {
+            get { return AmountUSD.MoneyFormat(); }
+        }
+
         public bool ShowInDonationLog { get; set; }
         public DateTime TimeStamp { get; set; }
 

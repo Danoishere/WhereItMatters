@@ -14,18 +14,21 @@ namespace WhereItMatters.Controllers
     public class MissionController : Controller
     {
         private readonly IRepository<Mission> _missionRepository;
+        private readonly DonationRequestRepository _donationRequestRepository;
 
-        public MissionController(IRepository<Mission> missionRepository)
+        public MissionController(IRepository<Mission> missionRepository, DonationRequestRepository donationRequestRepository)
         {
+            _donationRequestRepository = donationRequestRepository;
             _missionRepository = missionRepository;
         }
 
         public async Task<IActionResult> Detail(int missionId)
         {
-            var mission = await _missionRepository
-                .SearchFor(m => m.Id == missionId)
-                .Include(m => m.Requests)
-                .FirstOrDefaultAsync();
+            var mission = await _missionRepository.GetById(missionId);
+            mission.Requests = await _donationRequestRepository
+                .SearchFor(d => d.MissionId == missionId)
+                .Include(d => d.Donations)
+                .ToListAsync();
 
             return View(mission);
         }

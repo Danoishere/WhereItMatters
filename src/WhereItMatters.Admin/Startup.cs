@@ -56,6 +56,7 @@ namespace WhereItMatters.Admin
             services.AddScoped<DonationRequestRepository, DonationRequestRepository>();
             services.AddScoped<IRepository<Organisation>, BaseRepository<Organisation>>();
             services.AddScoped<IRepository<Mission>, BaseRepository<Mission>>();
+            services.AddScoped<LocalizationRepository>();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();

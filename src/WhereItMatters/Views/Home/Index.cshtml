@@ -10,9 +10,10 @@
         <br />
         <div class="container">
             <div class="jumbotron" style="opacity:0.75">
-                <h2>Save Lives. Now.</h2>
+                <h2>@await Localize.Get("Home_Header_Title")</h2>
                 <p>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                    @await Localize.Get("Home_Header_Text")
+                    @*Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.*@
                 </p>
             </div>
         </div>
@@ -22,8 +23,8 @@
 <br />
 
 <div class="row">
-    <h3 class="text-center">Most urgent projects</h3>
-    <p class="text-md text-center">Highest number of people impacted + highest urgency</p>
+    <h3 class="text-center">@await Localize.Get("Home_MostUrgent_Title")</h3>
+    <p class="text-md text-center">@await Localize.Get("Home_MostUrgent_Description")</p>
 </div>
 <br />
 <div class="row">
@@ -35,15 +36,15 @@
 <br />
 <div class="row">
     <div class="col-sm-12">
-        <a href="~/DonationRequest/ListUrgent" class="btn btn-danger center-block" style="width:180px">More urgent projects</a>
+        <a href="~/DonationRequest/ListUrgent" class="btn btn-danger center-block" style="width:180px">@await Localize.Get("Home_MostUrgent_Btn_ShowMore")</a>
     </div>
 </div>
 <br />
 <div class="seperator"></div>
 <br />
 <div class="row">
-    <h3 class="text-center">Trending projects</h3>
-    <p class="text-md text-center">Projects that got a lot of attention in the last few hours</p>
+    <h3 class="text-center">@await Localize.Get("Home_Trending_Title")</h3>
+    <p class="text-md text-center">@await Localize.Get("Home_MostUrgent_Description")</p>
 </div>
 
 <div class="row">
@@ -54,6 +55,6 @@
 </div>
 <br />
 <div class="row">
-    <a href="~/DonationRequest/ListAll" class="btn btn-danger center-block" style="width:150px">All projects</a>
+    <a href="~/DonationRequest/ListAll" class="btn btn-danger center-block" style="width:150px">@await Localize.Get("Home_Btn_AllProjects")</a>
 </div>
 <br />

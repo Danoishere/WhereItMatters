@@ -55,11 +55,16 @@ export class RequestList {
                         sumOfDonations = sumOfDonations + donation.amountUSD;
                     }, this);
                     request.stillNeeded = request.neededAmountUSD - sumOfDonations;
+                    request.stillNeeded = request.stillNeeded.toFixed(2);
                 }, this);
             });
     }
 
     searchTermChanged(newVal, oldVal) {
         this.searchRequests(newVal);
+    }
+
+    strip(number) {
+        return (parseFloat(number).toPrecision(12));
     }
 }

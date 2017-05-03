@@ -1,0 +1,15 @@
+﻿@model IEnumerable<LocalizedText>
+<h1>Text localization</h1>
+<br/>
+@foreach (var localizedText in Model)
+{
+    <form class="row" asp-action="SaveLocalization">
+        <div class="col-sm-3">
+            <p>@localizedText.Identifier</p>
+        </div>
+        <div class="col-sm-3">
+            <textarea name="valueEN" rows="3" class="form-control"></textarea>
+        </div>
+    </form>
+    <div class="seperator"></div>
+}
