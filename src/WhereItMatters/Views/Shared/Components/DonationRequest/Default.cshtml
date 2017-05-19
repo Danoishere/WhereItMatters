@@ -9,9 +9,12 @@
                         {
                             <img src="@Model.FullImageUrl" style="width:100%;border-radius:5px;margin:1px" alt="">
                         }
-                        <div class="image-overlay-bar"></div>
-                        <div class="image-overlay font-accent">
-                            <b>@Model.Mission.Name - @Model.Mission.Organisation.Name</b>
+                        <div style="position:absolute;bottom:0;left:0;right:0">
+                            <div class="image-overlay-bar">
+                                <div class="image-overlay font-accent">
+                                    <b>@Model.Mission.Name - @Model.Mission.Organisation.Name</b>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

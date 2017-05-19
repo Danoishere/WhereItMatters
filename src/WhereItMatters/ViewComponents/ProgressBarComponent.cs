@@ -11,6 +11,11 @@ namespace WhereItMatters.ViewComponents
     {
         public async Task<IViewComponentResult> InvokeAsync(decimal maxValue, decimal currentValue, decimal additionalValue = 0)
         {
+            if(maxValue == 0)
+            {
+                maxValue = 0.01m;
+            }
+
             ViewData["CurrentPercentage"] = (currentValue/maxValue) * 100;
             if(additionalValue > maxValue - currentValue)
             {

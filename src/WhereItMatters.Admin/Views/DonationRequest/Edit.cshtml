@@ -1,12 +1,18 @@
 ﻿@model DonationRequest
 
 <div class="row">
-    <div class="col-sm-12">
-        <h1>Edit Donation Request</h1>
+    <div class="col-sm-3 back-button-container">
+        <a asp-action="Detail" asp-controller="DonationRequest" asp-route-requestId="@Model.Id" class="back-button">
+            <span class="fa fa-arrow-circle-o-left"></span> Back
+        </a>
+    </div>
+    <div class="col-sm-9">
+        <h2>Edit Donation Request</h2>
     </div>
 </div>
+
 <br/>
-<form asp-action="Edit" asp-controller="DonationRequest" asp-route-requestId="@Model.Id" method="post" enctype="multipart/form-data">
+<form asp-action="Save" asp-controller="DonationRequest" asp-route-requestId="@Model.Id" method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="Id" />
     <input type="hidden" asp-for="CreatedOn"/>
     <input type="hidden" asp-for="EndDate" />

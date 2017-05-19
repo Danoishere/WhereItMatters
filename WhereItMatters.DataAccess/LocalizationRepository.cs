@@ -30,7 +30,7 @@ namespace WhereItMatters.DataAccess
             var localizedText = await SearchFor(l => l.Identifier.ToLower() == identifier.ToLower()).FirstOrDefaultAsync();
             if(localizedText == null)
             {
-                await Insert(new LocalizedText { Identifier = identifier, ValueEN = "(To be completed)" });
+                await Insert(new LocalizedText { Identifier = identifier, ValueEN = "(To be completed - " + identifier + ")" });
                 localizedText = await SearchFor(l => l.Identifier.ToLower() == identifier.ToLower()).FirstOrDefaultAsync();
             }
 

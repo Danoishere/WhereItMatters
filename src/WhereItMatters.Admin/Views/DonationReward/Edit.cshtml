@@ -1,0 +1,50 @@
+﻿@model DonationReward
+
+<div class="row">
+    <div class="col-sm-3 back-button-container">
+        <a asp-action="Detail" asp-controller="DonationRequest" asp-route-requestId="@Model.DonationRequestId" class="back-button">
+            <span class="fa fa-arrow-circle-o-left"></span> Back
+        </a>
+    </div>
+    <div class="col-sm-9">
+        <h2>Edit Donation Reward</h2>
+    </div>
+</div>
+<br />
+<form asp-action="Save" asp-controller="DonationReward" asp-route-donationRewardId="@Model.Id" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="DonationRequestId" />
+
+    <div class="row">
+        <div class="col-sm-3">
+            <label asp-for="MinimalDonation">Minimal Donation</label>
+        </div>
+        <div class="col-sm-9">
+            <input asp-for="MinimalDonation" type="text" class="form-control"/>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-sm-3">
+            <label asp-for="Title">Title of your reward</label>
+        </div>
+        <div class="col-sm-9">
+            <input asp-for="Title" class="form-control" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-3">
+            <label asp-for="Description">Reward Description</label>
+        </div>
+        <div class="col-sm-9">
+            <textarea rows="3" maxlength="500" asp-for="Description" class="form-control" placeholder="Descript what the donor gets if he makes a donation this or more valuable"></textarea>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-sm-9">
+            <input type="submit" value="Save" class="btn btn-success pull-right" />
+        </div>
+    </div>
+</form>

@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="~/lib/nprogress/nprogress.css" />
 
+    <link rel="stylesheet" href="~/css/blueimp/blueimp-gallery.min.css">
+    <link rel="stylesheet" href="~/css/blueimp/blueimp-gallery-indicator.css">
+    <link rel="stylesheet" href="~/css/blueimp/blueimp-gallery-video.css">
+    @*<link rel="stylesheet" href="~/css/blueimp/demo/demo.css">*@
+
     @RenderSection("scriptstop", required: false)
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -46,14 +51,15 @@
                 <a class="navbar-brand font-accent" asp-area="" asp-controller="Home" asp-action="Index">@await Localize.Get("APP_TITLE")</a>
             </div>
 
-            <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
+            <div class="topmost collapse navbar-collapse navbar-right navbar-ex1-collapse">
                 <ul class="text nav navbar-nav navbar-right">
-                    <li><a class="text" asp-area="" asp-controller="DonationRequest" asp-action="List">@await Localize.Get("Nav_Projects")</a></li>
-                    <li><a class="text" asp-area="" asp-controller="Organisation" asp-action="List">@await Localize.Get("Nav_NGOs")</a></li>
+                    <li><a class="text topmost" asp-area="" asp-controller="DonationRequest" asp-action="List">@await Localize.Get("Nav_Projects")</a></li>
+                    <li><a class="text topmost" asp-area="" asp-controller="Organisation" asp-action="List">@await Localize.Get("Nav_NGOs")</a></li>
                     @*<li><div style="margin-top:10px"> | </div></li>*@
-                    <li class="dropdown">
+                    <li class="dropdown topmost">
                         <a class="dropdown-toggle text" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            <li role="separator" class="divider"></li>
                             <li><a class="text" asp-area="" asp-controller="Home" asp-action="About">@await Localize.Get("Nav_EnlistYourNGO")</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a class="text" asp-action="Contact" asp-controller="Home">@await Localize.Get("Nav_Contact")</a></li>
@@ -72,6 +78,7 @@
             </div>
         </div>
     </div>
+
 
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

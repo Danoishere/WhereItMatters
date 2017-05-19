@@ -18,6 +18,7 @@ namespace WhereItMatters.DataAccess
                 .Include(r => r.Donations)
                 .Include(r => r.Mission)
                 .Include(r => r.Mission.Organisation)
+                .Include(r => r.DonationRewards)
                 .FirstOrDefaultAsync(r => r.Id == id);
 
             return request;

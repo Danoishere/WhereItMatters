@@ -14,7 +14,6 @@ using WhereItMatters.DataAccess;
 namespace WhereItMatters.Admin.Controllers
 {
     [Authorize]
-    [Route("DonationRequest")]
     public class DonationRequestController : Controller
     {
         private readonly DonationRequestRepository _requestRepository;
@@ -31,7 +30,6 @@ namespace WhereItMatters.Admin.Controllers
             _imageSaveService = imageSaveService;
         }
 
-        [Route("Detail/{requestId}")]
         public async Task<IActionResult> Detail(int requestId)
         {
             var request = await _requestRepository.GetFullById(requestId);
@@ -48,7 +46,6 @@ namespace WhereItMatters.Admin.Controllers
         }
 
         [HttpGet]
-        [Route("Create/{missionId}")]
         public IActionResult Create(int missionId)
         {
             var request = new DonationRequest
@@ -62,7 +59,6 @@ namespace WhereItMatters.Admin.Controllers
         }
 
         [HttpGet]
-        [Route("Edit/{requestId}")]
         public async Task<IActionResult> Edit(int requestId)
         {
             var request = await _requestRepository.GetFullById(requestId);
@@ -70,8 +66,7 @@ namespace WhereItMatters.Admin.Controllers
         }
 
         [HttpPost]
-        [Route("Edit/{requestId}")]
-        public async Task<IActionResult> Edit(int requestId, DonationRequest request, IList<IFormFile> files)
+        public async Task<IActionResult> Save(int requestId, DonationRequest request, IList<IFormFile> files)
         {
             var f = files;
             var newImageUrl = await _imageSaveService.SaveImage(Request);

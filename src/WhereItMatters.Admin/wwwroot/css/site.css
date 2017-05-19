@@ -65,7 +65,7 @@ textarea {
     bottom:0;
     left:1px;
     right:1px;
-    height:50px;
+    height:auto;
     background-color:black;
     opacity:0.7;
 }
@@ -133,4 +133,22 @@ textarea {
 
 #img-upload{
     width: 100%;
+}
+
+.back-button-container {
+    padding-top: 35px;
+}
+
+@media (max-width: 768px) {
+    .back-button-container {
+        margin-top: -20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-top-color: #436588;
+        border-bottom-color: #436588;
+        border-top-style: solid;
+        border-top-width: 2px;
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+    }
 }

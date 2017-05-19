@@ -1,6 +1,19 @@
 ﻿@model IEnumerable<Organisation>
 <br/>
-<h1>Organisations</h1>
+
+<div class="row">
+    <div class="col-sm-2 back-button-container">
+        <a asp-action="Index" asp-controller="Home" class="back-button">
+            <span class="fa fa-arrow-circle-o-left"></span> Back
+        </a>
+    </div>
+    <div class="col-sm-9">
+        <h1>Organisations</h1>
+    </div>
+</div>
+<div class="seperator"></div>
+<br/>
+
 <a class="btn btn-info pull-right" asp-action="Edit" asp-route-organisationId="0">New organisation</a>
 <br/>
 <br/>
