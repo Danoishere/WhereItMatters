@@ -9,23 +9,23 @@ using Microsoft.Net.Http.Headers;
 
 namespace WhereItMatters.Admin.Services
 {
-    public class ImageSaveService : IImageSaveService
+    public class PdfSaveService : IPdfSaveService
     {
         private readonly IHostingEnvironment _environment;
-        public ImageSaveService(IHostingEnvironment environment)
+        public PdfSaveService(IHostingEnvironment environment)
         {
             _environment = environment;
         }
 
-        public async Task<string> SaveImage(HttpRequest request)
+        public async Task<string> SavePdf(HttpRequest request)
         {
             var files = request.Form.Files;
-            foreach (var image in files.Where(f => f.FileName.ToLower().EndsWith("jpg") || f.FileName.ToLower().EndsWith("jpeg") || f.FileName.ToLower().EndsWith("png")))
+            foreach (var pdf in files.Where(f => f.FileName.ToLower().EndsWith("pdf")))
             {
-                if (image != null && image.Length > 0)
+                if (pdf != null && pdf.Length > 0)
                 {
-                    var file = image;
-                    var uploads = Path.Combine(_environment.WebRootPath, "images");
+                    var file = pdf;
+                    var uploads = Path.Combine(_environment.WebRootPath, "pdfs");
 
                     if (file.Length > 0)
                     {

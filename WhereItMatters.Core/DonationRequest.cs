@@ -10,6 +10,7 @@ namespace WhereItMatters.Core
     {
         public int Id { get; set; }
         public string ImageUrl { get; set; }
+        public string BudgetPdfUrl { get; set; }
         public string Title { get; set; }
         public string ShortSummary { get; set; }
         public string Description { get; set; }
@@ -100,6 +101,14 @@ namespace WhereItMatters.Core
             get
             {
                 return ImageConfig.Url + ImageUrl;
+            }
+        }
+
+        public string FullBudgetPdfUrl
+        {
+            get
+            {
+                return PdfConfig.Url + BudgetPdfUrl;
             }
         }
 

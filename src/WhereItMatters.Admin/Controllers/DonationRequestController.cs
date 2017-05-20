@@ -19,15 +19,18 @@ namespace WhereItMatters.Admin.Controllers
         private readonly DonationRequestRepository _requestRepository;
         private readonly IRepository<Donation> _donationRepository;
         private readonly IImageSaveService _imageSaveService;
+        private readonly IPdfSaveService _pdfSaveService;
 
         public DonationRequestController(
             DonationRequestRepository requestRepository, 
             IRepository<Donation> donationRepository,
-            IImageSaveService imageSaveService)
+            IImageSaveService imageSaveService,
+            IPdfSaveService pdfSaveService)
         {
             _requestRepository = requestRepository;
             _donationRepository = donationRepository;
             _imageSaveService = imageSaveService;
+            _pdfSaveService = pdfSaveService;
         }
 
         public async Task<IActionResult> Detail(int requestId)
@@ -70,9 +73,14 @@ namespace WhereItMatters.Admin.Controllers
         {
             var f = files;
             var newImageUrl = await _imageSaveService.SaveImage(Request);
+            var newPdfUrl = await _pdfSaveService.SavePdf(Request);
             if (!string.IsNullOrEmpty(newImageUrl))
             {
                 request.ImageUrl = newImageUrl;
+            }
+            if (!string.IsNullOrEmpty(newPdfUrl))
+            {
+                request.BudgetPdfUrl = newPdfUrl;
             }
 
             if (requestId == 0)

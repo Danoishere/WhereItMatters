@@ -45,6 +45,16 @@ namespace WhereItMatters.Controllers
             return View();
         }
 
+        public IActionResult Legal()
+        {
+            return View();
+        }
+
+        public IActionResult Vision()
+        {
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View();

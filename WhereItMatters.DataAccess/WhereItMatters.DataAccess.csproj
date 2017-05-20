@@ -222,6 +222,10 @@
     <Compile Include="Migrations\201705131058142_DonationRewardCorrection.Designer.cs">
       <DependentUpon>201705131058142_DonationRewardCorrection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705201102234_PdfBudgetAdded.cs" />
+    <Compile Include="Migrations\201705201102234_PdfBudgetAdded.Designer.cs">
+      <DependentUpon>201705201102234_PdfBudgetAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryBase.cs" />
@@ -281,6 +285,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705131058142_DonationRewardCorrection.resx">
       <DependentUpon>201705131058142_DonationRewardCorrection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705201102234_PdfBudgetAdded.resx">
+      <DependentUpon>201705201102234_PdfBudgetAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

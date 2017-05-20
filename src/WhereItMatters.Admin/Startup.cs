@@ -63,6 +63,7 @@ namespace WhereItMatters.Admin
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddTransient<IImageSaveService, ImageSaveService>();
+            services.AddTransient<IPdfSaveService, PdfSaveService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

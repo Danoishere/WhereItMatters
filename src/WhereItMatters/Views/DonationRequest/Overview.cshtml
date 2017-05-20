@@ -95,7 +95,19 @@
                     <p class="text-md">@Model.Description</p>
                 </div>
             </div>
-
+            @if (!string.IsNullOrEmpty(Model.BudgetPdfUrl))
+            {
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>@await Localize.Get("DonationReward_BudgetPdfTitle")</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <a href="@Model.FullBudgetPdfUrl" class="btn btn-info">@await Localize.Get("DonationReward_DownloadBudgetPdf")</a>
+                    </div>
+                </div>
+            }
         </div>
         <div class="col-sm-12">
             <br />

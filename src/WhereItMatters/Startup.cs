@@ -56,6 +56,7 @@ namespace WhereItMatters
             });
 
             ImageConfig.Url = "http://whereitmattersdev-admin.azurewebsites.net/images/";
+            PdfConfig.Url = "http://whereitmattersdev-admin.azurewebsites.net/pdfs/";
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
