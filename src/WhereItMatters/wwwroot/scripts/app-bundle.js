@@ -181,7 +181,7 @@ define('main',['exports', './environment'], function (exports, _environment) {
     });
   }
 });
-define('requestlist',['exports', 'aurelia-fetch-client', 'aurelia-framework', './filter'], function (exports, _aureliaFetchClient, _aureliaFramework, _filter) {
+define('requestlist',['exports', 'aurelia-fetch-client', 'aurelia-framework', './filter', 'whatwg-fetch'], function (exports, _aureliaFetchClient, _aureliaFramework, _filter) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
@@ -314,7 +314,7 @@ define('requestlist',['exports', 'aurelia-fetch-client', 'aurelia-framework', '.
         }
     })), _class2)) || _class);
 });
-define('requestlistmain',['exports', './environment', 'aurelia-fetch-client'], function (exports, _environment, _aureliaFetchClient) {
+define('requestlistmain',['exports', './environment', 'aurelia-fetch-client', 'whatwg-fetch'], function (exports, _environment, _aureliaFetchClient) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {

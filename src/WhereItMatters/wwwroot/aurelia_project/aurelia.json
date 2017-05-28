@@ -108,6 +108,7 @@
                     "aurelia-templating",
                     "aurelia-templating-binding",
                     "aurelia-fetch-client",
+                    "whatwg-fetch",
                     "text",
                     {
                         "name": "aurelia-templating-resources",

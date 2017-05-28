@@ -147,3 +147,11 @@ input::-webkit-inner-spin-button {
 .topmost {
     z-index: 100;
 }
+
+.carousel img {
+    min-width: 100%;
+}
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}

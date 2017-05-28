@@ -1,4 +1,5 @@
 import { HttpClient } from 'aurelia-fetch-client';
+import 'whatwg-fetch';
 import { inject, bindable } from 'aurelia-framework';
 import { Filter } from './filter';
 

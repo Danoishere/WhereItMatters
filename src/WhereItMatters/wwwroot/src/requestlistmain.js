@@ -1,5 +1,6 @@
 import environment from './environment';
 import { HttpClient } from 'aurelia-fetch-client';
+import 'whatwg-fetch';
 
 //Configure Bluebird Promises.
 Promise.config({
