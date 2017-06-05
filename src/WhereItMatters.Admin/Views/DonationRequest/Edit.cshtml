@@ -67,12 +67,21 @@
     <br/>
     <div class="row">
         <div class="col-sm-3">
-            <label>Request Image</label>
+            <label>Request Images</label>
         </div>
         <div class="col-sm-9">
-            <input type="file" class="form-control" name="files" accept=".png,.jpg,.jpeg"/>
+            <a asp-action="Edit" asp-controller="GalleryItem" asp-route-requestId="@Model.Id">Edit gallery images</a>
         </div>
     </div>
+    <br />
+    @*<div class="row">
+        <div class="col-sm-3">
+            <label>Thumbnail Image</label>
+        </div>
+        <div class="col-sm-9">
+            <a asp-action="Edit" asp-controller="GalleryItem" asp-route-requestId="@Model.Id">Edit gallery images</a>
+        </div>
+    </div>*@
     <br />
     <div class="row">
         <div class="col-sm-3">

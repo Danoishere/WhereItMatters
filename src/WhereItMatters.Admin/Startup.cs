@@ -57,6 +57,7 @@ namespace WhereItMatters.Admin
             services.AddScoped<IRepository<Organisation>, BaseRepository<Organisation>>();
             services.AddScoped<IRepository<Mission>, BaseRepository<Mission>>();
             services.AddScoped<IRepository<DonationReward>, BaseRepository<DonationReward>>();
+            services.AddScoped<IRepository<GalleryItem>, BaseRepository<GalleryItem>>();
             services.AddScoped<LocalizationRepository>();
 
             // Add application services.

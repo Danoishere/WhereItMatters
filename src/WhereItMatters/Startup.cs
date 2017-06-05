@@ -44,6 +44,7 @@ namespace WhereItMatters
             services.AddScoped<DonationRequestRepository, DonationRequestRepository>();
             services.AddScoped<IRepository<Organisation>, BaseRepository<Organisation>>();
             services.AddScoped<IRepository<Mission>, BaseRepository<Mission>>();
+            services.AddScoped<IRepository<GalleryItem>, BaseRepository<GalleryItem>>();
             services.AddScoped<LocalizationRepository, LocalizationRepository>();
 
             // Configure payment

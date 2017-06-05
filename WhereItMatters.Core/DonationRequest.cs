@@ -17,8 +17,10 @@ namespace WhereItMatters.Core
         public decimal NeededAmountUSD { get; set; }
         public Priority Priority { get; set; }
         public int ApproxPopulationImpacted { get; set; }
+
         public List<Donation> Donations { get; set; }
         public List<DonationReward> DonationRewards { get; set; }
+        public List<GalleryItem> GalleryItems { get; set; }
 
         public DateTime CreatedOn { get; set; }
         public DateTime? ClosedOn { get; set; }

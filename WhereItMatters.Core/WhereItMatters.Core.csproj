@@ -150,6 +150,7 @@
     <Compile Include="DonationRequest.cs" />
     <Compile Include="DonationReward.cs" />
     <Compile Include="DonationType.cs" />
+    <Compile Include="GalleryItem.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="Config\ImageConfig.cs" />
     <Compile Include="LocalizedText.cs" />

@@ -226,6 +226,14 @@
     <Compile Include="Migrations\201705201102234_PdfBudgetAdded.Designer.cs">
       <DependentUpon>201705201102234_PdfBudgetAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705301756179_AddGalleryItems.cs" />
+    <Compile Include="Migrations\201705301756179_AddGalleryItems.Designer.cs">
+      <DependentUpon>201705301756179_AddGalleryItems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705301926375_AddEmbeddedHtmlToGalleryItem.cs" />
+    <Compile Include="Migrations\201705301926375_AddEmbeddedHtmlToGalleryItem.Designer.cs">
+      <DependentUpon>201705301926375_AddEmbeddedHtmlToGalleryItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryBase.cs" />
@@ -288,6 +296,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705201102234_PdfBudgetAdded.resx">
       <DependentUpon>201705201102234_PdfBudgetAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705301756179_AddGalleryItems.resx">
+      <DependentUpon>201705301756179_AddGalleryItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705301926375_AddEmbeddedHtmlToGalleryItem.resx">
+      <DependentUpon>201705301926375_AddEmbeddedHtmlToGalleryItem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

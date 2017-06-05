@@ -20,6 +20,7 @@ namespace WhereItMatters.DataAccess
         public DbSet<Organisation> Organisations { get; set; }
         public DbSet<PageInfo> PageInfos { get; set; }
         public DbSet<DonationReward> DonationRewards { get; set; }
+        public DbSet<GalleryItem> GalleryItems { get; set; }
         public DbSet<LocalizedText> LocalizedTexts { get; set; }
     }
 }
