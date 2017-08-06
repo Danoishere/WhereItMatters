@@ -1,22 +1,21 @@
 <template>
-  <br/>
-  <div class="row">
-    <div class="col-sm-12">
-      <h2>Search Donation Requests</h2>
-    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Search Donation Requests</h2>
+        </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
             <div class="input-group">
                 <input type="text" class="form-control" style="max-width: 100%" value.bind="searchTerm & debounce:500" placeholder="Search for...">
                 <span class="input-group-btn">
-                    <button class="btn btn-info"  click.delegate="searchRequests(searchTerm)" type="button">Go!</button>
+                    <button class="btn btn-info" click.delegate="searchRequests(searchTerm)" type="button">Go!</button>
                 </span>
-                </div>
             </div>
         </div>
     </div>
-    <br/>
+    <br />
     <div class="row">
         <div class="col-sm-3">
             <compose view-model.bind="filter"></compose>
@@ -32,7 +31,7 @@
                             <div class="row"><div class="col-sm-12"><h3>${request.title}</h3></div></div>
                             <div class="row"><div class="col-sm-12"><p style="margin-bottom: 0" class="text-italic">«${request.shortSummary}»</p></div></div>
                         </div>
-                        <div class="col-sm-3"  style="margin-bottom: 0">
+                        <div class="col-sm-3" style="margin-bottom: 0">
                             <div class="row"><div class="col-sm-12"><b>${request.donations.length} donors so far<b></div></div>
                             <div class="row"><div class="col-sm-12"><p style="margin-bottom: 0" class="text-italic">$${request.stillNeeded} still needed<p></div></div>
                         </div>

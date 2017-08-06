@@ -74,14 +74,14 @@
         </div>
     </div>
     <br />
-    @*<div class="row">
+    <div class="row">
         <div class="col-sm-3">
             <label>Thumbnail Image</label>
         </div>
         <div class="col-sm-9">
-            <a asp-action="Edit" asp-controller="GalleryItem" asp-route-requestId="@Model.Id">Edit gallery images</a>
+            <input type="file" class="form-control" name="files" accept=".png,.jpg,.jpeg" />
         </div>
-    </div>*@
+    </div>
     <br />
     <div class="row">
         <div class="col-sm-3">
@@ -89,6 +89,15 @@
         </div>
         <div class="col-sm-9">
             <input type="file" class="form-control" name="files" accept=".pdf"/>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-3">
+            <label>Request Budget Items</label>
+        </div>
+        <div class="col-sm-9">
+            <a asp-action="Edit" asp-controller="BudgetItem" asp-route-requestId="@Model.Id">Edit request budget items</a>
         </div>
     </div>
     <br />
@@ -127,3 +136,4 @@
         </div>
     </div>
 </form>
+<br/>

@@ -28,6 +28,17 @@ namespace WhereItMatters.Admin.Controllers
             return View("Edit", donationReward);
         }
 
+        public async Task<IActionResult> Delete(int donationRewardId)
+        {
+            var donationReward = await _donationRewardRepository.GetById(donationRewardId);
+            var donationRequestId = donationReward.DonationRequestId;
+            await _donationRewardRepository.Delete(donationReward);
+
+            // forward to donation request overview
+            return RedirectToAction("Detail", "DonationRequest", new { requestId = donationRequestId });
+        }
+
+
         public async Task<IActionResult> Edit(int donationRewardId)
         {
             var donationReward = await _donationRewardRepository.GetById(donationRewardId);

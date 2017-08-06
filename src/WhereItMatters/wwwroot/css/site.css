@@ -111,6 +111,11 @@ textarea {
     border-radius: 2px;
 }
 
+.separator-vertical {
+  border-right: 1px solid rgba(0, 0, 0, 0.20);
+  margin-right: 10px;
+}
+
 .donation-box-bottom-right {
     float: right !important;
     position: absolute;
@@ -154,4 +159,18 @@ input::-webkit-inner-spin-button {
 
 .carousel-control.left, .carousel-control.right {
     background-image: none
+}
+
+.twitter-share-button, .fb-share-button{
+    width:80px !important;
+    height:30px !important;
+}
+
+.fb_iframe_widget iframe{
+    width:80px !important;
+    height:30px !important;
+}
+
+.fb_iframe_widget span {
+    vertical-align: top !important;
 }

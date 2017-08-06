@@ -20,6 +20,7 @@ namespace WhereItMatters.Core
 
         public List<Donation> Donations { get; set; }
         public List<DonationReward> DonationRewards { get; set; }
+        public List<BudgetItem> BudgetItems { get; set; }
         public List<GalleryItem> GalleryItems { get; set; }
 
         public DateTime CreatedOn { get; set; }

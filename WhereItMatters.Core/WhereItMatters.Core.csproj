@@ -145,6 +145,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BudgetItem.cs" />
     <Compile Include="Config\PdfConfig.cs" />
     <Compile Include="Donation.cs" />
     <Compile Include="DonationRequest.cs" />

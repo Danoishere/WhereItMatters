@@ -44,7 +44,10 @@
     <br/>
     <div class="row">
         <div class="col-sm-9">
-            <input type="submit" value="Save" class="btn btn-success pull-right" />
+            <span class="pull-right">
+                <a class="btn btn-danger " asp-action="Delete" asp-controller="DonationReward" asp-route-donationRewardId="@Model.Id">Delete</a>
+                <input type="submit" value="Save" class="btn btn-success " />
+            </span>
         </div>
     </div>
 </form>

@@ -19,9 +19,20 @@ namespace WhereItMatters.Controllers
             _organisationRepository = organisationRepository;
         }
 
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(string searchText)
         {
             var organisations = await _organisationRepository.GetAll().ToListAsync();
+            if (string.IsNullOrEmpty(searchText))
+            {
+                return View(organisations);
+            }
+
+            var searchParts = searchText.ToLower().Split(' ');
+            foreach (var searchPart in searchParts)
+            {
+                organisations.RemoveAll(o => !(o.Name.ToLower().Contains(searchPart) || o.Description.ToLower().Contains(searchPart) || o.Mail.ToLower().Contains(searchPart)));
+            }
+
             return View(organisations);
         }
 

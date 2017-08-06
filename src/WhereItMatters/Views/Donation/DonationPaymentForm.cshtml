@@ -13,10 +13,18 @@
 <br />
 <div class="row">
     <div class="col-sm-3">
-        <label class="control-label">Amount</label>
+        Amount
     </div>
     <div class="col-sm-9">
         <h3>$@Model.AmountUSDString</h3>
+    </div>
+</div>
+<div>
+    <div class="col-sm-3">
+        @await Localize.GetHtml("Donation_Payment_Disclaimer_Title")
+    </div>
+    <div class="col-sm-9">
+        @await Localize.GetHtml("Donation_Payment_Disclaimer_Body")
     </div>
 </div>
 

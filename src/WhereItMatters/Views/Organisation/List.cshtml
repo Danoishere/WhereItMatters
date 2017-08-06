@@ -5,11 +5,24 @@
 <h1>Organisations</h1>
 <p>Here you can find all organisations we are working with.</p>
 
+<form asp-action="List">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="input-group">
+                <input type="text" name="searchText" class="form-control" style="max-width: 100%" placeholder="Search for...">
+                <span class="input-group-btn">
+                    <input class="btn btn-info" value="Go!" type="submit"/>
+                </span>
+            </div>
+        </div>
+    </div>
+</form>
+<br/>
 @foreach (var organisation in Model)
 {
     <a class="thumbnail" asp-action="Detail" asp-controller="Organisation" asp-route-organisationId="@organisation.Id">
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-1">
 
             </div>
             <div class="col-sm-9">

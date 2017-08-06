@@ -2,8 +2,16 @@
 @{
     ViewData["Title"] = Model.Title;
 }
+@section opengraph{
+    <meta property="og:url" content="http://@Context.Request.Host@Context.Request.Path" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="@Model.Title" />
+    <meta property="og:description" content="@await Localize.Get("Home_Header_Text")" />
+    <meta property="og:image" content="@Model.FullImageUrl" />
+}
+
 <div class="row">
-    <div class="col-sm-8">
+    <div class="col-sm-9">
         <div class="col-sm-12">
             <div class="row">
                 <div class="col-sm-12">
@@ -43,7 +51,7 @@
                                 {
                                     @if (!string.IsNullOrEmpty(galleryItem.ImageName))
                                     {
-                                        <img src = "@ImageConfig.Url@galleryItem.ImageName" style = "width:100%" />
+                                        <img src="@ImageConfig.Url@galleryItem.ImageName" style="width:100%" />
                                     }
                                     else
                                     {
@@ -55,36 +63,25 @@
                         else
                         {
                             <div class="item">
-                            @if (galleryItem.IsEmbeddedHtml)
-                            {
-                                @Html.Raw(galleryItem.EmbeddedHtml)
-                            }
-                            else
-                            {
-                                @if (!string.IsNullOrEmpty(galleryItem.ImageName))
+                                @if (galleryItem.IsEmbeddedHtml)
                                 {
-                                    <img src="@ImageConfig.Url@galleryItem.ImageName" style="width:100%" />
+                                    @Html.Raw(galleryItem.EmbeddedHtml)
                                 }
                                 else
                                 {
-                                    <img src="@galleryItem.ItemUrl" style="width:100%" />
+                                    @if (!string.IsNullOrEmpty(galleryItem.ImageName))
+                                    {
+                                        <img src="@ImageConfig.Url@galleryItem.ImageName" style="width:100%" />
+                                    }
+                                    else
+                                    {
+                                        <img src="@galleryItem.ItemUrl" style="width:100%" />
+                                    }
                                 }
-                            }
-                        </div>
+                            </div>
                         }
                         </text>
                     }
-
-                    @*<div class="item" style="width:100%;height:400px">
-                            <iframe class="center-block" src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fajplusenglish%2Fvideos%2F966803126794528%2F&show_text=0&width=500" style="height:100%"></iframe>
-                        </div>
-                        <div class="item">
-                            <img src="~/images/requestimages/forest.jpg" alt="Chicago">
-                        </div>
-
-                        <div class="item">
-                            <img src="~/images/requestimages/image.jpg" alt="New York">
-                        </div>*@
                 </div>
 
                 <!-- Left and right controls -->
@@ -108,6 +105,16 @@
                     <p class="text-md text-italic" style="">«@Model.ShortSummary»</p>
                 </div>
             </div>
+            <div class="row">
+                <div style="display:inline-block;height:30px;width:80px;margin:10px;vertical-align:top">
+                    <div class="fb-share-button" data-href="http://@Context.Request.Host@Context.Request.Path" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" data-target="_blank">Share</a></div>
+                </div>
+                <div style="display:inline-block;height:30px;width:80px;margin:10px;vertical-align:top">
+                    <a class="twitter-share-button" href="https://twitter.com/intent/tweet">
+                        Tweet
+                    </a>
+                </div>
+            </div>
             @if (!Model.IsFinanced && !Model.IsFinished)
             {
                 <br />
@@ -122,8 +129,8 @@
                         </div>
                     </div>
                 </div>
-                                            <div class="seperator"></div>
-                                            <br />
+                <div class="seperator"></div>
+                <br />
             }
             // The campaign was not successful.
             else if (Model.IsFinished && !Model.IsFinanced)
@@ -160,23 +167,42 @@
             }
             <br />
             <div class="row">
-                <div class="col-sm-12">
-                    <p class="text-md">@Model.Description</p>
-                </div>
+                <!--Show budget if there is any-->
+                @if (Model.BudgetItems.Any() || !string.IsNullOrEmpty(Model.BudgetPdfUrl))
+                {
+                    <div class="col-sm-6 separator-vertical" style="height:100%">
+                        <p class="text-md">@Model.Description</p>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4>@await Localize.Get("DonationReward_BudgetPdfTitle")</h4>
+                            </div>
+                        </div>
+                        @foreach (var budgetItem in Model.BudgetItems)
+                        {
+                            <div class="panel panel-default" style="display:block">
+                                <p class="panel-body" style="font-size:18px;margin-bottom:0">@PaymentConfig.CurrencyShort@budgetItem.Price | @budgetItem.Description</p>
+                            </div>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.BudgetPdfUrl))
+                        {
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a href="@Model.FullBudgetPdfUrl" class="btn btn-info">@await Localize.Get("DonationReward_DownloadBudgetPdf")</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="col-sm-12">
+                        <p class="text-md">@Model.Description</p>
+                    </div>
+                }
             </div>
-            @if (!string.IsNullOrEmpty(Model.BudgetPdfUrl))
-            {
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h4>@await Localize.Get("DonationReward_BudgetPdfTitle")</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <a href="@Model.FullBudgetPdfUrl" class="btn btn-info">@await Localize.Get("DonationReward_DownloadBudgetPdf")</a>
-                    </div>
-                </div>
-            }
+
         </div>
         <div class="col-sm-12">
             <br />
@@ -219,38 +245,69 @@
             </div>
         }
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <div class="row">
             <div class="col-sm-12">
                 <br />
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <h3>@await Localize.Get("DonationRewards_Title")</h3>
-            </div>
-        </div>
+        @*<div class="row">
+                <div class="col-sm-12">
+                    <h3>@await Localize.Get("DonationRewards_Title")</h3>
+                </div>
+            </div>*@
         @foreach (var donationReward in Model.DonationRewards.OrderBy(r => r.MinimalDonation))
         {
-
-            <div class="thumbnail" style="padding:10px">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h4>@string.Format(await Localize.Get("DonationRewards_MinDonation"), donationReward.MinimalDonation)</h4>
-                    </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 style="margin: 10px 0px">@string.Format(await Localize.Get("DonationRewards_MinDonation"), donationReward.MinimalDonation)</h4>
                 </div>
-                <div class="seperator"></div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h3>@donationReward.Title</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <p>@donationReward.Description</p>
-                    </div>
+                <div class="col-sm-12">
+                    <a asp-controller="Donation" asp-action="DonationDetailsForRequest" asp-route-requestId="@Model.Id" asp-route-amount="@donationReward.MinimalDonation" class="btn btn-success btn-lg" style="margin: 15px 0px;font-weight:bold;white-space: normal;">@donationReward.Title</a>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p>@donationReward.Description</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+
+                </div>
+            </div>
+            <div class="seperator"></div>
         }
     </div>
-    </div>
+</div>
+<script>
+
+    // Facebook
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    // Twitter tweet
+
+    window.twttr = (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+          t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function (f) {
+            t._e.push(f);
+        };
+
+        return t;
+    }(document, "script", "twitter-wjs"));
+</script>
